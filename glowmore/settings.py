@@ -38,6 +38,9 @@ DEBUG = env('DEBUG', default=True)
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
 
+# CSRF Trusted Origins for Render
+CSRF_TRUSTED_ORIGINS = ['https://glowmore.onrender.com', 'https://*.onrender.com']
+
 
 # Application definition
 
@@ -137,14 +140,19 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = BASE_DIR / 'media'
 
-# Cloudinary Storage Config
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': env('CLOUDINARY_CLOUD_NAME', default='your_cloud_name'),
-    'API_KEY': env('CLOUDINARY_API_KEY', default='your_api_key'),
-    'API_SECRET': env('CLOUDINARY_API_SECRET', default='your_api_secret'),
+# Storage Configuration (Django 6.0+)
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
 }
 
+# Legacy aliases for 3rd party compatibility (e.g., django-cloudinary-storage)
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field
