@@ -14,17 +14,11 @@ import os
 from pathlib import Path
 import environ
 import dj_database_url
-from whitenoise.storage import CompressedManifestStaticFilesStorage
-
-class ReliableWhiteNoiseStorage(CompressedManifestStaticFilesStorage):
-    def post_process(self, *args, **kwargs):
-        try:
-            yield from super().post_process(*args, **kwargs)
-        except Exception:
-            pass
 
 # Setup environ
 env = environ.Env(
+    DEBUG=(bool, False)
+)
     DEBUG=(bool, False)
 )
 
@@ -157,13 +151,17 @@ STORAGES = {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "glowmore.settings.ReliableWhiteNoiseStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
 
 # Legacy aliases
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-STATICFILES_STORAGE = 'glowmore.settings.ReliableWhiteNoiseStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+# WhiteNoise Fail-safe serving
+WHITENOISE_AUTOREFRESH = True
+WHITENOISE_USE_FINDERS = False # Keep False for performance, but True if files are STILL missing
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field
