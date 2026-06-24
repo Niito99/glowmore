@@ -68,9 +68,9 @@ class Command(BaseCommand):
 
         sample_image_path = 'media/products/sample.png'
         
-        if not os.path.exists(sample_image_path):
-            self.stdout.write(self.style.ERROR(f'Sample image not found at {sample_image_path}'))
-            return
+        has_sample = os.path.exists(sample_image_path)
+        if not has_sample:
+            self.stdout.write(self.style.WARNING(f'Sample image not found at {sample_image_path}. Products will be created without images.'))
 
         for p_data in products:
             product, created = Product.objects.get_or_create(
@@ -83,8 +83,9 @@ class Command(BaseCommand):
                 }
             )
             if created:
-                with open(sample_image_path, 'rb') as f:
-                    product.image.save(f'product_{product.id}.png', File(f), save=True)
+                if has_sample:
+                    with open(sample_image_path, 'rb') as f:
+                        product.image.save(f'product_{product.id}.png', File(f), save=True)
                 self.stdout.write(self.style.SUCCESS(f'Created product: {product.name}'))
             else:
                 self.stdout.write(self.style.WARNING(f'Product already exists: {product.name}'))
