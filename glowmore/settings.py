@@ -160,7 +160,7 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # WhiteNoise Fail-safe serving
 WHITENOISE_AUTOREFRESH = True
-WHITENOISE_USE_FINDERS = False # Keep False for performance, but True if files are STILL missing
+WHITENOISE_USE_FINDERS = True # Force WhiteNoise to find files even in production
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field
