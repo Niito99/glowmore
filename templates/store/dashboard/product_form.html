@@ -1,0 +1,50 @@
+{% extends 'store/dashboard/base.html' %}
+
+{% block dashboard_content %}
+<h2 class="mb-30">{{ title }}</h2>
+
+<div class="form-card">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group mb-20">
+                <label>{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <p class="error-msg">{{ field.errors.as_text }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn">Save Product</button>
+        <a href="{% url 'dashboard_products' %}" class="btn-cancel">Cancel</a>
+    </form>
+</div>
+
+<style>
+.form-card {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--lavender-bg);
+    max-width: 600px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--lavender-bg);
+    border-radius: 4px;
+    outline: none;
+    font-family: inherit;
+}
+
+.mb-20 { margin-bottom: 20px; }
+.error-msg { color: #e74c3c; font-size: 0.8rem; margin-top: 5px; }
+
+.btn-cancel {
+    display: inline-block;
+    margin-left: 20px;
+    color: var(--text-muted);
+}
+</style>
+{% endblock %}

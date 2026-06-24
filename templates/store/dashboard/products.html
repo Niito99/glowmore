@@ -1,0 +1,38 @@
+{% extends 'store/dashboard/base.html' %}
+
+{% block dashboard_content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <h2>Product Inventory</h2>
+    <a href="{% url 'product_create' %}" class="btn btn-small">+ Add Product</a>
+</div>
+
+<div class="dashboard-table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td><img src="{{ product.image.url }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;"></td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>₵{{ product.price }}</td>
+                    <td>{{ product.stock }}</td>
+                    <td class="actions">
+                        <a href="{% url 'product_update' product.pk %}" class="action-edit">Edit</a>
+                        <a href="{% url 'product_delete' product.pk %}" class="action-delete">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

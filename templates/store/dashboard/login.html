@@ -1,0 +1,65 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Owner Login | GlowMore{% endblock %}
+
+{% block content %}
+<section class="container login-section">
+    <div class="login-card">
+        <h1>Owner Login</h1>
+        <p>Enter your credentials to access the dashboard.</p>
+        
+        <form method="POST" class="login-form">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group mb-20">
+                    <label>{{ field.label }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-full">Login</button>
+        </form>
+    </div>
+</section>
+
+<style>
+.login-section {
+    padding: 100px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.login-card {
+    max-width: 400px;
+    width: 100%;
+    padding: 40px;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--lavender-bg);
+    text-align: center;
+}
+
+.login-card h1 {
+    margin-bottom: 10px;
+}
+
+.login-card p {
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+.login-form {
+    text-align: left;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--lavender-bg);
+    border-radius: 4px;
+    outline: none;
+}
+
+.mb-20 { margin-bottom: 20px; }
+</style>
+{% endblock %}

@@ -1,0 +1,211 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="hero">
+    <div class="container hero-content">
+        <h1>Glow on your own terms.</h1>
+        <p>Discover our curated collection of premium beauty and skincare products.</p>
+        <a href="#shop" class="btn">Shop Now</a>
+    </div>
+</section>
+
+<section id="shop" class="container shop-section">
+    <div class="filter-bar">
+        <form method="GET" class="filter-form">
+            <select name="category" onchange="this.form.submit()">
+                <option value="">All Categories</option>
+                {% for code, name in categories %}
+                    <option value="{{ code }}" {% if current_category == code %}selected{% endif %}>{{ name }}</option>
+                {% endfor %}
+            </select>
+            
+            <div class="price-filters">
+                <input type="number" name="min_price" placeholder="Min ₵" value="{{ request.GET.min_price }}">
+                <input type="number" name="max_price" placeholder="Max ₵" value="{{ request.GET.max_price }}">
+                <button type="submit" class="btn btn-small">Filter</button>
+            </div>
+
+            <select name="sort" onchange="this.form.submit()">
+                <option value="">Sort By</option>
+                <option value="price_asc" {% if request.GET.sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                <option value="price_desc" {% if request.GET.sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+            </select>
+            
+            {% if request.GET.category or request.GET.min_price or request.GET.max_price or request.GET.sort %}
+                <a href="/" class="clear-filters">Clear All</a>
+            {% endif %}
+        </form>
+    </div>
+
+    <div class="product-grid">
+        {% for product in products %}
+            <div class="product-card">
+                <a href="{% url 'product_detail' product.id %}" class="product-image-link">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                </a>
+                <div class="product-info">
+                    <span class="product-category">{{ product.category }}</span>
+                    <h3>{{ product.name }}</h3>
+                    <p class="product-price">₵{{ product.price }}</p>
+                    <form action="{% url 'add_to_cart' product.id %}" method="POST" class="add-to-cart-form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-full">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        {% empty %}
+            <p class="no-products">No products found matching your criteria.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Hero */
+.hero {
+    background-image: linear-gradient(rgba(106, 13, 173, 0.1), rgba(106, 13, 173, 0.1)), url('{% static "store/images/hero-bg.jpg" %}');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    text-align: center;
+    background-color: var(--lavender-bg);
+    margin-bottom: 60px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: var(--primary-violet);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Shop Section */
+.shop-section {
+    padding-bottom: 80px;
+}
+
+.filter-bar {
+    margin-bottom: 40px;
+    padding: 20px;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.filter-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-form select, .filter-form input {
+    padding: 10px;
+    border: 1px solid var(--lavender-bg);
+    border-radius: 4px;
+    outline: none;
+}
+
+.price-filters {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.price-filters input {
+    width: 100px;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+}
+
+.clear-filters {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--text-muted);
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid var(--lavender-bg);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(106, 13, 173, 0.1);
+}
+
+.product-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+}
+
+.product-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.product-category {
+    font-size: 0.8rem;
+    color: var(--primary-violet);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.product-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    height: 3rem;
+    overflow: hidden;
+}
+
+.product-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.btn-full {
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .filter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .price-filters input {
+        flex: 1;
+    }
+}
+</style>
+{% endblock %}

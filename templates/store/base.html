@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GlowMore | Beauty & Cosmetics{% endblock %}</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="/" class="brand">
+                    <img id="brand-logo" src="{% static 'store/images/logo.png' %}" alt="GlowMore" style="height: 100px; width: auto;">
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="/">Shop</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                    {% if user.is_staff %}
+                        <li><a href="{% url 'dashboard_home' %}" class="dashboard-link">Dashboard</a></li>
+                    {% endif %}
+                </ul>
+                
+                <div class="nav-utils">
+                    <a href="/cart/" class="cart-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                        <span class="cart-badge" id="cart-count">{{ request.session.cart|length|default:0 }}</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="{% static 'store/images/logo.png' %}" alt="GlowMore" style="height: 60px; margin-bottom: 15px;">
+                <p>Empowering individuals to unlock their natural beauty. Your premier destination for luxury cosmetics in Kasoa-Ofaakor.</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://www.instagram.com/glow_more_beauty_cosmetics?igsh=a3BhMGxqcjNreWhn" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1GucCQb31X/?mibextid=wwXIfr" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/233501302852" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 GlowMore. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Toasts container -->
+    <div id="toast-container"></div>
+
+    <script src="{% static 'store/js/main.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% if messages %}
+                {% for message in messages %}
+                    showToast("{{ message }}");
+                {% endfor %}
+            {% endif %}
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

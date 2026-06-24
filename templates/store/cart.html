@@ -1,0 +1,200 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}GlowMore | Your Cart{% endblock %}
+
+{% block content %}
+<section class="container cart-section">
+    <h1 class="section-title">Your Shopping Cart</h1>
+
+    {% if cart %}
+        <div class="cart-grid">
+            <div class="cart-items">
+                {% for product_id, item in cart.items %}
+                    <div class="cart-item">
+                        <img src="{{ item.image }}" alt="{{ item.name }}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <h3>{{ item.name }}</h3>
+                            <p class="unit-price">₵{{ item.price }}</p>
+                            <form action="{% url 'update_cart' product_id %}" method="POST" class="update-form">
+                                {% csrf_token %}
+                                <label for="quantity-{{ product_id }}">Qty:</label>
+                                <input type="number" name="quantity" id="quantity-{{ product_id }}" value="{{ item.quantity }}" min="1" onchange="this.form.submit()">
+                            </form>
+                        </div>
+                        <div class="cart-item-subtotal">
+                            <p>₵{{ item.price|linebreaksbr }}</p>
+                            <a href="{% url 'remove_from_cart' product_id %}" class="remove-link">Remove</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="cart-summary">
+                <h2>Order Summary</h2>
+                <div class="summary-line">
+                    <span>Subtotal</span>
+                    <span>₵{{ total|floatformat:2 }}</span>
+                </div>
+                <div class="summary-line">
+                    <span>Delivery</span>
+                    <span>Calculated at checkout</span>
+                </div>
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span>₵{{ total|floatformat:2 }}</span>
+                </div>
+                <a href="{% url 'checkout' %}" class="btn btn-full">Proceed to Checkout</a>
+                <a href="{% url 'product_list' %}" class="continue-shopping">Continue Shopping</a>
+            </div>
+        </div>
+    {% else %}
+        <div class="empty-cart">
+            <p>Your cart is empty.</p>
+            <a href="{% url 'product_list' %}" class="btn">Shop Our Collection</a>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.cart-section {
+    padding-top: 60px;
+    padding-bottom: 100px;
+}
+
+.cart-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cart-item {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background: var(--white);
+    border: 1px solid var(--lavender-bg);
+    border-radius: 8px;
+    align-items: center;
+}
+
+.cart-item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.cart-item-details {
+    flex: 1;
+}
+
+.cart-item-details h3 {
+    margin-bottom: 5px;
+}
+
+.unit-price {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.update-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.update-form input {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid var(--lavender-bg);
+    border-radius: 4px;
+    text-align: center;
+}
+
+.cart-item-subtotal {
+    text-align: right;
+}
+
+.cart-item-subtotal p {
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.remove-link {
+    font-size: 0.8rem;
+    color: #e74c3c;
+    border-bottom: 1px solid transparent;
+}
+
+.remove-link:hover {
+    border-bottom-color: #e74c3c;
+}
+
+/* Summary */
+.cart-summary {
+    background: var(--lavender-bg);
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.cart-summary h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    color: var(--text-muted);
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(106, 13, 173, 0.2);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin-bottom: 30px;
+}
+
+.continue-shopping {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 100px 0;
+}
+
+.empty-cart p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: var(--text-muted);
+}
+
+@media (max-width: 900px) {
+    .cart-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}

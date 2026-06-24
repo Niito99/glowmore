@@ -1,0 +1,61 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}About Us | GlowMore Beauty{% endblock %}
+
+{% block content %}
+<section class="about-hero section-bg">
+    <div class="container text-center">
+        <h1>About GlowMore</h1>
+        <p class="lead">Glow on your own terms.</p>
+    </div>
+</section>
+
+<section class="container about-details py-80">
+    <div class="about-grid">
+        <div class="about-text">
+            <h2>Our Story</h2>
+            <p>Welcome to <strong>GlowMore Beauty and Cosmetics</strong>, your premier destination for exceptional beauty and skincare essentials. Nestled in the heart of <strong>Kasoa-Ofaakor</strong>, we offer an expertly curated collection of high-quality products sourced from world-renowned international brands and talented local artisans.</p>
+            
+            <p>From transformative cosmetics and advanced skincare to haircare and signature fragrances, our knowledgeable and friendly team is dedicated to providing personalized service and expert advice to help you achieve your unique beauty goals.</p>
+
+            <div class="mission-box mt-40">
+                <h3>Our Mission</h3>
+                <p>Our mission is to empower individuals to unlock their natural beauty, enhancing their confidence and self-expression. At GlowMore, we celebrate the diversity and uniqueness of every individual's beauty.</p>
+            </div>
+        </div>
+        <div class="about-image">
+            <img src="{% static 'store/images/about.jpg' %}" alt="About GlowMore" style="width: 100%; border-radius: 8px; box-shadow: var(--shadow);">
+        </div>
+    </div>
+</section>
+
+<style>
+.about-hero {
+    padding: 80px 0;
+}
+.lead {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+}
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    align-items: center;
+}
+.mission-box {
+    background: var(--lavender-bg);
+    padding: 30px;
+    border-left: 4px solid var(--primary-violet);
+    border-radius: 0 8px 8px 0;
+}
+.mt-40 { margin-top: 40px; }
+.py-80 { padding: 80px 0; }
+.text-center { text-align: center; }
+
+@media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; }
+}
+</style>
+{% endblock %}

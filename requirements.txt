@@ -1,0 +1,9 @@
+django
+requests
+Pillow
+django-environ
+whitenoise
+cloudinary
+django-cloudinary-storage
+gunicorn
+dj-database-url

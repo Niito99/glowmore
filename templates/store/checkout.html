@@ -1,0 +1,193 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}GlowMore | Checkout{% endblock %}
+
+{% block content %}
+<section class="container checkout-section">
+    <h1 class="section-title">Checkout</h1>
+
+    <div class="checkout-grid">
+        <div class="checkout-form-container">
+            <h2>Delivery Details</h2>
+            <form id="paymentForm" class="checkout-form">
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" required placeholder="Jane Doe">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required placeholder="jane@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required placeholder="024 XXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label for="address">Delivery Address</label>
+                    <textarea id="address" required placeholder="House No, Street Name, City"></textarea>
+                </div>
+                
+                <div class="payment-action">
+                    <button type="submit" class="btn btn-full">Pay with Paystack</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="order-summary-sidebar">
+            <h2>Order Summary</h2>
+            <div class="summary-items">
+                {% for p_id, item in cart.items %}
+                    <div class="summary-item">
+                        <span>{{ item.name }} x {{ item.quantity }}</span>
+                        <span>₵{{ item.price }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="summary-total">
+                <span>Total to Pay</span>
+                <span>₵{{ total|floatformat:2 }}</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+    const paymentForm = document.getElementById('paymentForm');
+    paymentForm.addEventListener("submit", payWithPaystack, false);
+
+    function payWithPaystack(e) {
+        e.preventDefault();
+
+        let handler = PaystackPop.setup({
+            key: '{{ paystack_public_key }}',
+            email: document.getElementById("email").value,
+            amount: {{ total }} * 100, // in kobo
+            currency: "GHS",
+            ref: '' + Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a real reference.
+            metadata: {
+                full_name: document.getElementById("full-name").value,
+                phone: document.getElementById("phone").value,
+                address: document.getElementById("address").value,
+            },
+            callback: function(response) {
+                // Payment successful
+                verifyTransaction(response.reference);
+            },
+            onClose: function() {
+                alert('Window closed.');
+            }
+        });
+
+        handler.openIframe();
+    }
+
+    function verifyTransaction(reference) {
+        fetch(`/payment/verify/${reference}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'verified') {
+                window.location.href = `/order-confirmed/?order_id=${data.order_id}`;
+            } else {
+                alert("Payment verification failed. Please contact support.");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("An error occurred. Please contact support.");
+        });
+    }
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.checkout-section {
+    padding-top: 60px;
+    padding-bottom: 100px;
+}
+
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 60px;
+    align-items: start;
+}
+
+.checkout-form-container h2, .order-summary-sidebar h2 {
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+}
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+.form-group input, .form-group textarea {
+    padding: 12px;
+    border: 1px solid var(--lavender-bg);
+    border-radius: 4px;
+    outline: none;
+    font-family: inherit;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.order-summary-sidebar {
+    background: var(--lavender-bg);
+    padding: 40px;
+    border-radius: 8px;
+}
+
+.summary-items {
+    margin-bottom: 20px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-top: 1px solid rgba(106, 13, 173, 0.2);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text-dark);
+}
+
+@media (max-width: 900px) {
+    .checkout-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}
