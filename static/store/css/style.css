@@ -225,9 +225,42 @@ footer {
 }
 
 /* Responsive */
+.nav-toggle {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--primary-violet);
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+
     .nav-links {
         display: none;
+        position: absolute;
+        top: 100px; /* Matching navbar height */
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+        text-align: center;
+    }
+
+    .nav-utils {
+        display: none; /* Hide cart on mobile if needed, or adjust */
     }
     
     .footer-container {

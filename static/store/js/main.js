@@ -11,3 +11,15 @@ function showToast(message) {
         setTimeout(() => toast.remove(), 500);
     }, 3000);
 }
+
+// Mobile Menu Toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileToggle) {
+        mobileToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+    }
+});
