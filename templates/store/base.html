@@ -36,7 +36,7 @@
             </div>
             <a href="{% url 'cart_view' %}" class="cart-icon">
                 <i class="fas fa-shopping-basket"></i>
-                <span class="cart-count">{{ cart_count|default:"0" }}</span>
+                <span class="cart-count">{{ request.session.cart|length|default:"0" }}</span>
             </a>
             <a href="{% url 'dashboard_home' %}" class="user-icon mobile-hidden">
                 <i class="fas fa-user-circle"></i>
@@ -103,14 +103,13 @@
         {% if user.is_authenticated %}
             <li><a href="{% url 'dashboard_home' %}"><i class="fas fa-user-circle"></i> Dashboard</a></li>
             <li>
-                <form action="{% url 'logout' %}" method="POST" class="sidebar-logout">
+                <form action="{% url 'owner_logout' %}" method="POST" class="sidebar-logout">
                     {% csrf_token %}
                     <button type="submit"><i class="fas fa-sign-out-alt"></i> Logout</button>
                 </form>
             </li>
         {% else %}
-            <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
-            <li><a href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a></li>
+            <li><a href="{% url 'owner_login' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
         {% endif %}
     </ul>
 </div>
