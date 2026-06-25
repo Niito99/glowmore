@@ -2,55 +2,50 @@
 {% load static %}
 
 {% block content %}
-<section class="hero">
+<section class="hero reveal">
     <div class="container hero-content">
-        <h1>Glow on your own terms.</h1>
-        <p>Discover our curated collection of premium beauty and skincare products.</p>
-        <a href="#shop" class="btn">Shop Now</a>
+        <h1 class="premium-title">Glow on your own terms.</h1>
+        <p class="premium-subtitle">Discover our curated collection of premium beauty and skincare products.</p>
+        <a href="#shop" class="btn btn-gold">Shop Now</a>
+    </div>
+</section>
+
+<section class="container categories-section">
+    <div class="section-header">
+        <p>Shop by category or browse <span class="highlight-gold">Through Products</span>.</p>
+    </div>
+    <div class="categories-slider">
+        {% for code, name in categories %}
+            <a href="?category={{ code }}" class="category-item">
+                <div class="category-circle">
+                    <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=150&auto=format&fit=crop" alt="{{ name }}">
+                </div>
+                <span class="category-name">{{ name }}</span>
+            </a>
+        {% endfor %}
     </div>
 </section>
 
 <section id="shop" class="container shop-section">
-    <div class="filter-bar">
-        <form method="GET" class="filter-form">
-            <select name="category" onchange="this.form.submit()">
-                <option value="">All Categories</option>
-                {% for code, name in categories %}
-                    <option value="{{ code }}" {% if current_category == code %}selected{% endif %}>{{ name }}</option>
-                {% endfor %}
-            </select>
-            
-            <div class="price-filters">
-                <input type="number" name="min_price" placeholder="Min ₵" value="{{ request.GET.min_price }}">
-                <input type="number" name="max_price" placeholder="Max ₵" value="{{ request.GET.max_price }}">
-                <button type="submit" class="btn btn-small">Filter</button>
-            </div>
-
-            <select name="sort" onchange="this.form.submit()">
-                <option value="">Sort By</option>
-                <option value="price_asc" {% if request.GET.sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
-                <option value="price_desc" {% if request.GET.sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
-            </select>
-            
-            {% if request.GET.category or request.GET.min_price or request.GET.max_price or request.GET.sort %}
-                <a href="/" class="clear-filters">Clear All</a>
-            {% endif %}
-        </form>
-    </div>
-
     <div class="product-grid">
         {% for product in products %}
-            <div class="product-card">
+            <div class="product-card hover-lift reveal">
+                <div class="sale-badge">SALE</div>
+                <div class="wishlist-heart">
+                    <i class="far fa-heart"></i>
+                </div>
                 <a href="{% url 'product_detail' product.id %}" class="product-image-link">
                     <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
                 </a>
                 <div class="product-info">
-                    <span class="product-category">{{ product.category }}</span>
                     <h3>{{ product.name }}</h3>
-                    <p class="product-price">₵{{ product.price }}</p>
+                    <div class="product-price">
+                        <span class="old-price">₵{{ product.price|add:"20" }}</span>
+                        <span class="current-price">₵{{ product.price }}</span>
+                    </div>
                     <form action="{% url 'add_to_cart' product.id %}" method="POST" class="add-to-cart-form">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-full">Add to Cart</button>
+                        <button type="submit" class="btn btn-gold btn-full">Select Options</button>
                     </form>
                 </div>
             </div>

@@ -12,14 +12,34 @@ function showToast(message) {
     }, 3000);
 }
 
-// Mobile Menu Toggle
+// Mobile Menu / Sidebar Toggle
 document.addEventListener('DOMContentLoaded', function() {
     const mobileToggle = document.getElementById('mobile-toggle');
-    const navLinks = document.querySelector('.nav-links');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarClose = document.getElementById('sidebar-close');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
 
-    if (mobileToggle) {
-        mobileToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-        });
+    function toggleSidebar() {
+        sidebar.classList.toggle('active');
+        sidebarOverlay.classList.toggle('active');
     }
+
+    if (mobileToggle) mobileToggle.addEventListener('click', toggleSidebar);
+    if (sidebarClose) sidebarClose.addEventListener('click', toggleSidebar);
+    if (sidebarOverlay) sidebarOverlay.addEventListener('click', toggleSidebar);
+
+    // Scroll Reveal Animation
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 });
