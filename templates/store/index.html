@@ -2,11 +2,24 @@
 {% load static %}
 
 {% block content %}
-<section class="hero reveal">
+<section class="hero-slider reveal">
+    <!-- Slides -->
+    <div class="hero-slides">
+        <div class="slide active" style="background-image: url('/Users/danielokine/.gemini/antigravity/brain/bdf6c653-4b74-408d-bd02-4172e73c2d83/uploaded_media_4_1782412094037.jpg')"></div>
+        <div class="slide" style="background-image: url('/Users/danielokine/.gemini/antigravity/brain/bdf6c653-4b74-408d-bd02-4172e73c2d83/uploaded_media_3_1782412094037.jpg')"></div>
+        <div class="slide" style="background-image: url('/Users/danielokine/.gemini/antigravity/brain/bdf6c653-4b74-408d-bd02-4172e73c2d83/uploaded_media_2_1782412094037.jpg')"></div>
+    </div>
+    
     <div class="container hero-content">
-        <h1 class="premium-title">Glow on your own terms.</h1>
-        <p class="premium-subtitle">Discover our curated collection of premium beauty and skincare products.</p>
-        <a href="#shop" class="btn btn-gold">Shop Now</a>
+        <div class="hero-text-card">
+            <span class="hero-badge">PREMIUM BEAUTY & CARE</span>
+            <h1 class="premium-title">Glow on your own terms.</h1>
+            <p class="premium-subtitle">Exclusive skincare collections delivered to your door. Experience luxury in every drop.</p>
+            <div class="hero-actions">
+                <a href="#shop" class="btn btn-vibrant">SHOP NOW <i class="fas fa-arrow-right"></i></a>
+                <a href="{% url 'about' %}" class="btn btn-outline">OUR STORY</a>
+            </div>
+        </div>
     </div>
 </section>
 

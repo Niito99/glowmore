@@ -28,6 +28,17 @@ document.addEventListener('DOMContentLoaded', function() {
     if (sidebarClose) sidebarClose.addEventListener('click', toggleSidebar);
     if (sidebarOverlay) sidebarOverlay.addEventListener('click', toggleSidebar);
 
+    // Hero Slider Logic
+    const slides = document.querySelectorAll('.slide');
+    if (slides.length > 0) {
+        let currentSlide = 0;
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 3000);
+    }
+
     // Scroll Reveal Animation
     const observerOptions = {
         threshold: 0.1
