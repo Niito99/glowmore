@@ -64,6 +64,20 @@ class Command(BaseCommand):
                 'price': 130.00,
                 'stock': 75,
             },
+            {
+                'name': 'Premium Beauty Case',
+                'category': 'others',
+                'description': 'A luxury travel case for all your beauty essentials.',
+                'price': 250.00,
+                'stock': 15,
+            },
+            {
+                'name': 'Glow Mirror',
+                'category': 'others',
+                'description': 'LED lighted mirror for perfect makeup application.',
+                'price': 120.00,
+                'stock': 20,
+            },
         ]
 
         sample_image_path = 'media/products/sample.png'
