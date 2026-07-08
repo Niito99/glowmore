@@ -195,8 +195,18 @@ ul {
 }
 
 .centered-logo img {
-    height: 45px;
+    height: 68px;
     width: auto;
+}
+
+/* Ghost login button — invisible until hover */
+.user-icon {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.user-icon:hover,
+.main-nav:hover .user-icon {
+    opacity: 1;
 }
 
 .nav-utils {

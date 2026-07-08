@@ -121,23 +121,153 @@
     {% block content %}{% endblock %}
 </main>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-brand">
-                <img src="{% static 'store/images/logo.png' %}" alt="GlowMore" style="height: 60px; margin-bottom: 15px;">
-                <p>Empowering individuals to unlock their natural beauty. Your premier destination for luxury cosmetics in Kasoa-Ofaakor.</p>
+    <footer class="site-footer">
+        <div class="footer-top container">
+            <!-- Brand Column -->
+            <div class="footer-col footer-brand-col">
+                <img src="{% static 'store/images/logo.png' %}" alt="GlowMore" class="footer-logo">
+                <p class="footer-tagline">Glow More Beauty &amp; Cosmetics brings you premium skincare, beauty essentials, and lifestyle products designed to help you look and feel your best. Quality products, affordable prices, delivered across Ghana.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/glow_more_beauty_cosmetics?igsh=a3BhMGxqcjNreWhn" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/share/1GucCQb31X/?mibextid=wwXIfr" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/233501302852" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.tiktok.com/@wig_wura" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
             </div>
-            <div class="footer-links">
-                <a href="https://www.instagram.com/glow_more_beauty_cosmetics?igsh=a3BhMGxqcjNreWhn" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.facebook.com/share/1GucCQb31X/?mibextid=wwXIfr" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://wa.me/233501302852" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.tiktok.com/@wig_wura" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+
+            <!-- Quick Links -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Quick Links</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="{% url 'product_list' %}">Shop</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping &amp; Delivery</a></li>
+                    <li><a href="#">Returns &amp; Refunds</a></li>
+                </ul>
+            </div>
+
+            <!-- Trust Elements -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Why Choose Us</h4>
+                <ul class="footer-trust-list">
+                    <li><i class="fas fa-lock"></i> Secure Payments</li>
+                    <li><i class="fas fa-shipping-fast"></i> Fast Delivery</li>
+                    <li><i class="fas fa-certificate"></i> Authentic Products</li>
+                    <li><i class="fas fa-headset"></i> Customer Support</li>
+                </ul>
             </div>
         </div>
+
         <div class="footer-bottom">
-            <p>&copy; 2026 GlowMore. All rights reserved.</p>
+            <p>&copy; 2026 GlowMore Beauty &amp; Cosmetics. All rights reserved.</p>
         </div>
     </footer>
+
+    <style>
+    /* ===== PREMIUM FOOTER ===== */
+    .site-footer {
+        background: #1a1a1a;
+        color: rgba(255,255,255,0.7);
+        margin-top: 80px;
+    }
+    .footer-top {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 50px;
+        padding-top: 60px;
+        padding-bottom: 50px;
+    }
+    .footer-logo {
+        height: 75px;
+        width: auto;
+        margin-bottom: 20px;
+        display: block;
+    }
+    .footer-tagline {
+        font-size: 0.9rem;
+        line-height: 1.8;
+        color: rgba(255,255,255,0.6);
+        margin-bottom: 25px;
+    }
+    .footer-social {
+        display: flex;
+        gap: 14px;
+    }
+    .footer-social a {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255,255,255,0.7);
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+    .footer-social a:hover {
+        background: var(--primary-violet);
+        color: #fff;
+        transform: translateY(-3px);
+    }
+    .footer-heading {
+        font-family: 'Lato', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 20px;
+    }
+    .footer-nav-list {
+        list-style: none;
+        padding: 0;
+    }
+    .footer-nav-list li {
+        margin-bottom: 12px;
+    }
+    .footer-nav-list a {
+        color: rgba(255,255,255,0.6);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+    }
+    .footer-nav-list a:hover {
+        color: var(--accent-gold);
+    }
+    .footer-trust-list {
+        list-style: none;
+        padding: 0;
+    }
+    .footer-trust-list li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 14px;
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.6);
+    }
+    .footer-trust-list i {
+        color: var(--accent-gold);
+        width: 16px;
+    }
+    .footer-bottom {
+        border-top: 1px solid rgba(255,255,255,0.08);
+        text-align: center;
+        padding: 20px;
+        font-size: 0.8rem;
+        color: rgba(255,255,255,0.35);
+    }
+    @media (max-width: 768px) {
+        .footer-top {
+            grid-template-columns: 1fr;
+            gap: 35px;
+        }
+    }
+    </style>
+
 
     <!-- Toasts container -->
     <div id="toast-container"></div>
