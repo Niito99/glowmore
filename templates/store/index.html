@@ -24,9 +24,31 @@
     </div>
 </section>
 
+<!-- Trust Badges Strip -->
+<div class="trust-strip">
+    <div class="container trust-strip-inner">
+        <div class="trust-strip-item">
+            <i class="fas fa-truck"></i>
+            <div><strong>Fast Delivery</strong><span>Across Ghana</span></div>
+        </div>
+        <div class="trust-strip-item">
+            <i class="fas fa-certificate"></i>
+            <div><strong>100% Authentic</strong><span>Quality Guaranteed</span></div>
+        </div>
+        <div class="trust-strip-item">
+            <i class="fas fa-lock"></i>
+            <div><strong>Secure Payments</strong><span>Pay with confidence</span></div>
+        </div>
+        <div class="trust-strip-item">
+            <i class="fas fa-star"></i>
+            <div><strong>Loved by 1000+</strong><span>Happy Customers</span></div>
+        </div>
+    </div>
+</div>
+
 <section class="container categories-section">
     <div class="section-header">
-        <p>Shop by category or browse <span class="highlight-gold">Through Products</span>.</p>
+        <h2>SHOP BY CATEGORY</h2>
     </div>
     <div class="categories-slider">
         {% for code, name in categories %}
@@ -41,6 +63,9 @@
 </section>
 
 <section id="shop" class="container shop-section">
+    <div class="shop-section-header">
+        <h2>OUR PRODUCTS</h2>
+    </div>
     <div class="product-grid">
         {% for product in products %}
             <div class="product-card hover-lift reveal">
@@ -77,6 +102,7 @@
     </div>
 </section>
 {% endblock %}
+
 
 {% block extra_css %}
 <style>

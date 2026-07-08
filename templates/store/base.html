@@ -23,6 +23,13 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body>
+
+<!-- Announcement Bar -->
+<div class="announcement-bar">
+    <span><i class="fas fa-truck"></i> Free delivery on all orders over <strong>GH₵ 300</strong></span>
+    <a href="{% url 'product_list' %}" class="announcement-cta">Shop Now</a>
+</div>
+
 <nav class="navbar main-nav sticky-top">
     <div class="nav-container header-top">
         <div class="mobile-menu-btn" id="mobile-toggle">
@@ -111,9 +118,8 @@
                     <button type="submit"><i class="fas fa-sign-out-alt"></i> Logout</button>
                 </form>
             </li>
-        {% else %}
-            <li><a href="{% url 'owner_login' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
         {% endif %}
+
     </ul>
 </div>
 
