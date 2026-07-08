@@ -122,11 +122,21 @@
 </main>
 
     <footer class="site-footer">
-        <div class="footer-top container">
+
+        <!-- Main Footer Grid -->
+        <div class="footer-main container">
+
             <!-- Brand Column -->
             <div class="footer-col footer-brand-col">
-                <img src="{% static 'store/images/logo.png' %}" alt="GlowMore" class="footer-logo">
+                <div class="footer-brand-identity">
+                    <img src="{% static 'store/images/logo.png' %}" alt="GlowMore" class="footer-logo">
+                    <div class="footer-brand-text">
+                        <span class="footer-brand-name">GLOW MORE</span>
+                        <span class="footer-brand-sub">BEAUTY &amp; COSMETICS</span>
+                    </div>
+                </div>
                 <p class="footer-tagline">Glow More Beauty &amp; Cosmetics brings you premium skincare, beauty essentials, and lifestyle products designed to help you look and feel your best. Quality products, affordable prices, delivered across Ghana.</p>
+                <p class="footer-follow-label">FOLLOW US</p>
                 <div class="footer-social">
                     <a href="https://www.instagram.com/glow_more_beauty_cosmetics?igsh=a3BhMGxqcjNreWhn" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.facebook.com/share/1GucCQb31X/?mibextid=wwXIfr" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -135,138 +145,431 @@
                 </div>
             </div>
 
-            <!-- Quick Links -->
+            <!-- Shop Column -->
             <div class="footer-col">
-                <h4 class="footer-heading">Quick Links</h4>
+                <h4 class="footer-heading">SHOP</h4>
                 <ul class="footer-nav-list">
-                    <li><a href="{% url 'product_list' %}">Shop</a></li>
-                    <li><a href="{% url 'about' %}">About Us</a></li>
-                    <li><a href="{% url 'contact' %}">Contact</a></li>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Shipping &amp; Delivery</a></li>
-                    <li><a href="#">Returns &amp; Refunds</a></li>
+                    <li><a href="{% url 'product_list' %}">All Products</a></li>
+                    <li><a href="{% url 'product_list' %}?category=Skin+Care">Skincare</a></li>
+                    <li><a href="{% url 'product_list' %}?category=Makeup">Makeup</a></li>
+                    <li><a href="{% url 'product_list' %}?category=Hair+Care">Hair Care</a></li>
+                    <li><a href="{% url 'product_list' %}?category=Body+Care">Body Care</a></li>
+                    <li><a href="{% url 'product_list' %}?category=Beauty+tools+and+Accessories">Accessories</a></li>
                 </ul>
             </div>
 
-            <!-- Trust Elements -->
+            <!-- Customer Care Column -->
             <div class="footer-col">
-                <h4 class="footer-heading">Why Choose Us</h4>
-                <ul class="footer-trust-list">
-                    <li><i class="fas fa-lock"></i> Secure Payments</li>
-                    <li><i class="fas fa-shipping-fast"></i> Fast Delivery</li>
-                    <li><i class="fas fa-certificate"></i> Authentic Products</li>
-                    <li><i class="fas fa-headset"></i> Customer Support</li>
+                <h4 class="footer-heading">CUSTOMER CARE</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns &amp; Refunds</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms &amp; Conditions</a></li>
                 </ul>
+            </div>
+
+            <!-- Contact Column -->
+            <div class="footer-col">
+                <h4 class="footer-heading">CONTACT US</h4>
+                <ul class="footer-contact-list">
+                    <li><i class="fas fa-map-marker-alt"></i> Kasoa-Ofaakor, Ghana</li>
+                    <li><a href="tel:+233501302852"><i class="fas fa-phone"></i> +233 50 130 2852</a></li>
+                    <li><a href="https://wa.me/233501302852"><i class="fab fa-whatsapp"></i> +233 50 130 2852</a></li>
+                    <li><a href="mailto:info@glowmoregh.com"><i class="fas fa-envelope"></i> info@glowmoregh.com</a></li>
+                    <li><i class="fas fa-clock"></i> Mon–Sat: 8:00am – 6:00pm</li>
+                    <li style="padding-left:22px; opacity:0.6;">Sunday: Closed</li>
+                </ul>
+                <p class="footer-thankyou"><em>Thank you for choosing <strong>GLOW MORE</strong> 💜</em></p>
+            </div>
+        </div>
+
+        <!-- Newsletter Strip -->
+        <div class="footer-newsletter-strip">
+            <div class="container footer-newsletter-inner">
+                <div class="footer-nl-text">
+                    <i class="fas fa-envelope footer-nl-icon"></i>
+                    <div>
+                        <strong>STAY GLOWING</strong>
+                        <p>Subscribe to get exclusive offers, beauty tips &amp; new product updates.</p>
+                    </div>
+                </div>
+                <form class="footer-nl-form">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit">SUBSCRIBE</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Trust Badges Row -->
+        <div class="footer-trust-row container">
+            <div class="footer-trust-item">
+                <i class="fas fa-truck"></i>
+                <div>
+                    <strong>FAST &amp; RELIABLE DELIVERY</strong>
+                    <span>Across Ghana</span>
+                </div>
+            </div>
+            <div class="footer-trust-item">
+                <i class="fas fa-certificate"></i>
+                <div>
+                    <strong>100% ORIGINAL PRODUCTS</strong>
+                    <span>Premium quality</span>
+                </div>
+            </div>
+            <div class="footer-trust-item">
+                <i class="fas fa-undo-alt"></i>
+                <div>
+                    <strong>EASY RETURNS &amp; EXCHANGES</strong>
+                    <span>Shop with confidence</span>
+                </div>
+            </div>
+            <div class="footer-trust-item">
+                <i class="fas fa-headset"></i>
+                <div>
+                    <strong>EXCELLENT CUSTOMER SUPPORT</strong>
+                    <span>We're here to help</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-partners-row container">
+            <div class="footer-partners-group">
+                <span class="partners-label">WE ACCEPT</span>
+                <div class="partner-badges">
+                    <span class="partner-badge momo"><i class="fas fa-mobile-alt"></i> MoMo</span>
+                    <span class="partner-badge visa"><i class="fab fa-cc-visa"></i> Visa</span>
+                    <span class="partner-badge mastercard"><i class="fab fa-cc-mastercard"></i> Mastercard</span>
+                </div>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2026 GlowMore Beauty &amp; Cosmetics. All rights reserved.</p>
+            <p>&copy; 2026 Glow More Beauty &amp; Cosmetics. All Rights Reserved.</p>
+            <p>Designed with 💜 for beauty that empowers.</p>
         </div>
     </footer>
 
     <style>
-    /* ===== PREMIUM FOOTER ===== */
+    /* ===== PREMIUM PURPLE FOOTER ===== */
     .site-footer {
-        background: #1a1a1a;
-        color: rgba(255,255,255,0.7);
+        background: #20032e;
+        color: rgba(255,255,255,0.75);
         margin-top: 80px;
+        font-size: 0.88rem;
     }
-    .footer-top {
+    .footer-main {
         display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        gap: 50px;
-        padding-top: 60px;
-        padding-bottom: 50px;
+        grid-template-columns: 1.8fr 1fr 1.2fr 1.3fr;
+        gap: 40px;
+        padding: 55px 20px 45px;
+    }
+    /* Brand identity: logo on top, wordmark stacked under it */
+    .footer-brand-identity {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 18px;
     }
     .footer-logo {
-        height: 75px;
+        height: 70px;
         width: auto;
-        margin-bottom: 20px;
-        display: block;
+        flex-shrink: 0;
+    }
+    .footer-brand-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.25;
+    }
+    .footer-brand-name {
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: 1.5px;
+        font-family: 'Playfair Display', serif;
+    }
+    .footer-brand-sub {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        color: rgba(255,255,255,0.6);
+        text-transform: uppercase;
+        margin-top: 2px;
     }
     .footer-tagline {
-        font-size: 0.9rem;
-        line-height: 1.8;
         color: rgba(255,255,255,0.6);
-        margin-bottom: 25px;
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+    .footer-follow-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: rgba(255,255,255,0.5);
+        margin-bottom: 10px;
     }
     .footer-social {
         display: flex;
-        gap: 14px;
+        gap: 10px;
     }
     .footer-social a {
-        width: 38px;
-        height: 38px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
-        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.25);
         display: flex;
         align-items: center;
         justify-content: center;
         color: rgba(255,255,255,0.7);
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         transition: all 0.3s ease;
     }
     .footer-social a:hover {
-        background: var(--primary-violet);
+        background: rgba(255,255,255,0.15);
         color: #fff;
         transform: translateY(-3px);
     }
     .footer-heading {
         font-family: 'Lato', sans-serif;
-        font-size: 0.8rem;
-        font-weight: 700;
+        font-size: 0.75rem;
+        font-weight: 800;
         letter-spacing: 2px;
-        text-transform: uppercase;
         color: #fff;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
     }
     .footer-nav-list {
         list-style: none;
         padding: 0;
+        margin: 0;
     }
     .footer-nav-list li {
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
     .footer-nav-list a {
-        color: rgba(255,255,255,0.6);
+        color: rgba(255,255,255,0.65);
         text-decoration: none;
-        font-size: 0.9rem;
         transition: color 0.3s ease;
     }
     .footer-nav-list a:hover {
-        color: var(--accent-gold);
+        color: #e8c840;
+        padding-left: 4px;
     }
-    .footer-trust-list {
+    .footer-contact-list {
         list-style: none;
         padding: 0;
+        margin: 0;
     }
-    .footer-trust-list li {
+    .footer-contact-list li {
+        margin-bottom: 10px;
+        color: rgba(255,255,255,0.65);
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .footer-contact-list i {
+        margin-top: 3px;
+        color: #e8c840;
+        width: 14px;
+        flex-shrink: 0;
+    }
+    .footer-contact-list a {
+        color: rgba(255,255,255,0.65);
+        text-decoration: none;
+        transition: color 0.3s;
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+    }
+    .footer-contact-list a:hover { color: #fff; }
+    .footer-thankyou {
+        margin-top: 16px;
+        font-size: 0.82rem;
+        color: rgba(255,255,255,0.5);
+    }
+    /* Newsletter Strip */
+    .footer-newsletter-strip {
+        background: rgba(0,0,0,0.15);
+        border-top: 1px solid rgba(255,255,255,0.06);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        padding: 24px 0;
+    }
+    .footer-newsletter-inner {
         display: flex;
         align-items: center;
-        gap: 12px;
-        margin-bottom: 14px;
+        justify-content: space-between;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+    .footer-nl-text {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        color: #fff;
+    }
+    .footer-nl-icon {
+        font-size: 2rem;
+        opacity: 0.6;
+    }
+    .footer-nl-text strong {
         font-size: 0.9rem;
-        color: rgba(255,255,255,0.6);
+        display: block;
+        letter-spacing: 1px;
     }
-    .footer-trust-list i {
-        color: var(--accent-gold);
-        width: 16px;
-    }
-    .footer-bottom {
-        border-top: 1px solid rgba(255,255,255,0.08);
-        text-align: center;
-        padding: 20px;
+    .footer-nl-text p {
         font-size: 0.8rem;
-        color: rgba(255,255,255,0.35);
+        color: rgba(255,255,255,0.55);
+        margin: 0;
     }
-    @media (max-width: 768px) {
-        .footer-top {
+    .footer-nl-form {
+        display: flex;
+        gap: 0;
+        flex-grow: 1;
+        max-width: 480px;
+    }
+    .footer-nl-form input {
+        flex: 1;
+        padding: 12px 18px;
+        border: none;
+        background: rgba(255,255,255,0.08);
+        color: #fff;
+        border-radius: 4px 0 0 4px;
+        outline: none;
+        font-size: 0.85rem;
+    }
+    .footer-nl-form input::placeholder { color: rgba(255,255,255,0.4); }
+    .footer-nl-form button {
+        padding: 12px 24px;
+        background: #e8c840;
+        color: #1a0033;
+        border: none;
+        font-weight: 800;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        border-radius: 0 4px 4px 0;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    .footer-nl-form button:hover { background: #f5d748; }
+    /* Trust Row */
+    .footer-trust-row {
+        display: flex;
+        gap: 30px;
+        padding: 28px 20px;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-trust-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex: 1 1 180px;
+    }
+    .footer-trust-item i {
+        font-size: 1.8rem;
+        color: #e8c840;
+        flex-shrink: 0;
+    }
+    .footer-trust-item strong {
+        display: block;
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+        color: #fff;
+    }
+    .footer-trust-item span {
+        font-size: 0.72rem;
+        color: rgba(255,255,255,0.45);
+    }
+    /* Partners Row (Payments & Deliveries) */
+    .footer-partners-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 40px;
+        padding: 30px 20px 20px;
+        flex-wrap: wrap;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-partners-group {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .partners-label {
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        color: rgba(255,255,255,0.4);
+    }
+    .partner-badges {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    .partner-badge {
+        background: #fff;
+        color: #3b1259;
+        font-weight: 700;
+        font-size: 0.75rem;
+        padding: 6px 12px;
+        border-radius: 4px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .partner-badge i {
+        font-size: 0.9rem;
+    }
+    .partner-badge.dhl {
+        background: #fc0;
+        color: #d00000;
+    }
+    .partner-badge.visa {
+        color: #00579f;
+    }
+    .partner-badge.mastercard {
+        color: #000;
+    }
+    .partner-badge.amex {
+        color: #007bc1;
+    }
+    /* Bottom Bar */
+    .footer-bottom {
+        text-align: center;
+        padding: 24px 20px;
+        font-size: 0.78rem;
+        color: rgba(255,255,255,0.3);
+        line-height: 1.8;
+    }
+    /* Responsive */
+    @media (max-width: 900px) {
+        .footer-main {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    @media (max-width: 600px) {
+        .footer-main {
             grid-template-columns: 1fr;
-            gap: 35px;
+            padding: 40px 20px 30px;
+        }
+        .footer-newsletter-inner {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .footer-nl-form { max-width: 100%; width: 100%; }
+        .footer-partners-row {
+            flex-direction: column;
+            gap: 24px;
         }
     }
     </style>
+
 
 
     <!-- Toasts container -->

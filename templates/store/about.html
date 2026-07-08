@@ -1,61 +1,403 @@
 {% extends 'store/base.html' %}
 {% load static %}
 
-{% block title %}About Us | GlowMore Beauty{% endblock %}
+{% block title %}About Us | Glow More Beauty &amp; Cosmetics{% endblock %}
 
 {% block content %}
-<section class="about-hero section-bg">
+<section class="about-hero">
     <div class="container text-center">
-        <h1>About GlowMore</h1>
-        <p class="lead">Glow on your own terms.</p>
+        <span class="hero-badge">BEAUTY THAT INSPIRES CONFIDENCE</span>
+        <h1>About Glow More</h1>
+        <p class="lead">Glow More Beauty &amp; Cosmetics brings you premium skincare, beauty essentials, and lifestyle products designed to help you look and feel your best.</p>
     </div>
 </section>
 
-<section class="container about-details py-80">
-    <div class="about-grid">
-        <div class="about-text">
-            <h2>Our Story</h2>
-            <p><strong>Glow More Beauty &amp; Cosmetics</strong> brings you premium skincare, beauty essentials, and lifestyle products designed to help you look and feel your best. Quality products, affordable prices, delivered across Ghana.</p>
-            
-            <p>We are nestled in the heart of <strong>Kasoa-Ofaakor</strong>, with an expertly curated collection of high-quality products sourced from world-renowned international brands and talented local artisans. From transformative cosmetics and advanced skincare to haircare and signature fragrances, our team is dedicated to helping you achieve your unique beauty goals.</p>
+<!-- Our Story, Mission, Vision Grid -->
+<section class="container py-80">
+    <div class="about-main-grid">
+        <div class="about-narrative">
+            <div class="narrative-section">
+                <h2 class="sub-heading">Our Story</h2>
+                <p>Welcome to <strong>Glow More Beauty &amp; Cosmetics</strong>, where beauty meets confidence. We believe that everyone deserves to feel beautiful, empowered, and comfortable in their own skin. Our journey began with one clear goal in mind: to make premium beauty products accessible to everyone in Ghana.</p>
+                <p>We know how important it is to find products you can trust. That's why we carefully source our collections, choosing products that meet our highest standards for quality, performance, and value. Every item in our store is selected with you in mind, because your confidence is our greatest success.</p>
+            </div>
 
-            <div class="mission-box mt-40">
-                <h3>Our Mission</h3>
-                <p>Our mission is to make premium beauty accessible to everyone. We believe quality skincare and beauty essentials should not be a luxury — they should be a daily standard. At GlowMore, we celebrate the diversity and uniqueness of every individual's beauty.</p>
+            <div class="narrative-blocks">
+                <div class="narrative-block">
+                    <h3><i class="fas fa-heart"></i> Our Mission</h3>
+                    <p>To empower every customer to embrace their natural beauty by providing authentic, high-quality beauty products, exceptional customer service, and a seamless shopping experience.</p>
+                </div>
+                <div class="narrative-block">
+                    <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                    <p>To become one of Ghana's most trusted online beauty destinations, known for quality products, outstanding customer care, and helping every customer glow with confidence.</p>
+                </div>
             </div>
         </div>
-        <div class="about-image">
-            <img src="{% static 'store/images/about.jpg' %}" alt="About GlowMore" style="width: 100%; border-radius: 8px; box-shadow: var(--shadow);">
+        <div class="about-media-col">
+            <div class="image-wrapper">
+                <img src="{% static 'store/images/about.jpg' %}" alt="About Glow More" class="about-img">
+                <div class="experience-card">
+                    <span class="exp-num">100%</span>
+                    <span class="exp-text">Authentic Products Sourced Worldwide</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us Grid -->
+<section class="why-choose-bg py-80">
+    <div class="container">
+        <div class="text-center mb-60">
+            <span class="section-badge">BENEFITS</span>
+            <h2 class="section-title">Why Shop With Glow More?</h2>
+            <p class="section-subtitle">We believe luxury beauty should be accessible, secure, and delightful.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-magic"></i></div>
+                <h3>Carefully Selected</h3>
+                <p>Every product is chosen with quality, effectiveness, and customer satisfaction in mind.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+                <h3>Beauty for Every Routine</h3>
+                <p>From skincare and body care to beauty accessories and everyday essentials, we have something for every beauty lover.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-truck"></i></div>
+                <h3>Fast Delivery Across Ghana</h3>
+                <p>We deliver safely and reliably nationwide, bringing your favourite products right to your doorstep.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Secure Shopping</h3>
+                <p>Enjoy a safe and convenient shopping experience with trusted, secure payment options.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-smile"></i></div>
+                <h3>Customer-First Service</h3>
+                <p>Our customers are at the heart of everything we do. We are committed to friendly support at every stage.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-award"></i></div>
+                <h3>Premium Quality</h3>
+                <p>We believe luxury shouldn't be out of reach. That's why we offer premium beauty products at affordable prices.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values & Values Section -->
+<section class="container py-80">
+    <div class="values-header text-center mb-60">
+        <span class="section-badge">CORE VALUES</span>
+        <h2 class="section-title">Values That Guide Us</h2>
+    </div>
+
+    <div class="values-flex">
+        <div class="value-item">
+            <strong>Quality</strong>
+            <p>We never compromise on the products we offer.</p>
+        </div>
+        <div class="value-item">
+            <strong>Trust</strong>
+            <p>We believe lasting relationships are built on honesty and reliability.</p>
+        </div>
+        <div class="value-item">
+            <strong>Confidence</strong>
+            <p>Beauty starts with confidence, and we're here to help you feel your best.</p>
+        </div>
+        <div class="value-item">
+            <strong>Care</strong>
+            <p>Every order is packed with care and appreciation.</p>
+        </div>
+        <div class="value-item">
+            <strong>Growth</strong>
+            <p>We continuously expand our collection to bring you the latest beauty innovations.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Community / CTA Section -->
+<section class="community-cta">
+    <div class="container text-center">
+        <h2>Join the Glow More Community</h2>
+        <p>Glow More Beauty &amp; Cosmetics is more than an online store — it's a community of beauty lovers who believe in self-care, confidence, and embracing their natural glow.</p>
+        <p class="cta-sub">Follow us to discover new arrivals, exclusive offers, and beauty tips.</p>
+        <div class="cta-buttons">
+            <a href="https://www.instagram.com/glow_more_beauty_cosmetics?igsh=a3BhMGxqcjNreWhn" target="_blank" class="cta-btn instagram"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://www.tiktok.com/@wig_wura" target="_blank" class="cta-btn tiktok"><i class="fab fa-tiktok"></i> TikTok</a>
+            <a href="https://wa.me/233501302852" target="_blank" class="cta-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
         </div>
     </div>
 </section>
 
 <style>
+/* Hero Styling */
 .about-hero {
-    padding: 80px 0;
+    background: #20032e;
+    color: #fff;
+    padding: 100px 0 80px;
+    position: relative;
+    overflow: hidden;
 }
-.lead {
-    font-size: 1.2rem;
-    color: var(--text-muted);
+.about-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    font-weight: 700;
 }
-.about-grid {
+.about-hero .lead {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.8;
+}
+.hero-badge {
+    display: inline-block;
+    background: rgba(232, 200, 64, 0.15);
+    color: #e8c840;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+}
+
+/* Story and Mission Grid */
+.about-main-grid {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
     gap: 60px;
+    align-items: flex-start;
+}
+.sub-heading {
+    font-size: 2.2rem;
+    color: #20032e;
+    margin-bottom: 20px;
+}
+.narrative-section p {
+    font-size: 1.05rem;
+    color: var(--text-dark);
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+.narrative-blocks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-top: 40px;
+}
+.narrative-block {
+    background: #FAF8F5;
+    padding: 25px;
+    border-radius: 12px;
+    border-top: 3px solid var(--primary-violet);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+.narrative-block h3 {
+    font-size: 1.2rem;
+    color: #20032e;
+    margin-bottom: 12px;
+    display: flex;
     align-items: center;
+    gap: 10px;
 }
-.mission-box {
-    background: var(--lavender-bg);
-    padding: 30px;
-    border-left: 4px solid var(--primary-violet);
-    border-radius: 0 8px 8px 0;
+.narrative-block i {
+    color: var(--primary-violet);
 }
-.mt-40 { margin-top: 40px; }
-.py-80 { padding: 80px 0; }
-.text-center { text-align: center; }
+.narrative-block p {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
 
-@media (max-width: 768px) {
-    .about-grid { grid-template-columns: 1fr; }
+/* Image Column */
+.image-wrapper {
+    position: relative;
+}
+.about-img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08); /* Premium shadows */
+    display: block;
+}
+.experience-card {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background: #e8c840;
+    color: #1a0033;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(232, 200, 64, 0.3);
+    max-width: 220px;
+}
+.exp-num {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+.exp-text {
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+/* Why choose us */
+.why-choose-bg {
+    background: #FAF8F5;
+}
+.mb-60 { margin-bottom: 60px; }
+.section-badge {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--primary-violet);
+    display: block;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+.section-title {
+    font-size: 2.5rem;
+    color: #20032e;
+    margin-bottom: 15px;
+}
+.section-subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+.feature-card {
+    background: #fff;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(59, 18, 89, 0.08);
+}
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(106, 13, 173, 0.08);
+    color: var(--primary-violet);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+.feature-card h3 {
+    font-size: 1.25rem;
+    color: #20032e;
+    margin-bottom: 12px;
+}
+.feature-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Core Values */
+.values-flex {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+.value-item {
+    flex: 1 1 200px;
+    background: #fff;
+    border: 1px solid rgba(106,13,173,0.08);
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.01);
+}
+.value-item strong {
+    display: block;
+    font-size: 1.2rem;
+    color: #20032e;
+    margin-bottom: 8px;
+    font-family: 'Playfair Display', serif;
+}
+.value-item p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Community CTA Section */
+.community-cta {
+    background: #20032e;
+    color: #fff;
+    padding: 80px 20px;
+}
+.community-cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+.community-cta p {
+    max-width: 700px;
+    margin: 0 auto 15px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    line-height: 1.8;
+}
+.cta-sub {
+    font-size: 0.95rem;
+    opacity: 0.65 !important;
+    margin-bottom: 35px !important;
+}
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.cta-btn {
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    transition: transform 0.3s;
+}
+.cta-btn:hover {
+    transform: translateY(-3px);
+    color: #fff;
+}
+.cta-btn.instagram { background: #e1306c; }
+.cta-btn.tiktok { background: #000; border: 1px solid rgba(255,255,255,0.25); }
+.cta-btn.whatsapp { background: #25d366; }
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .about-hero h1 { font-size: 2.6rem; }
+    .about-main-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-media-col { order: -1; }
+    .experience-card { position: static; margin-top: -30px; margin-left: 20px; }
+}
+@media (max-width: 500px) {
+    .narrative-blocks { grid-template-columns: 1fr; }
 }
 </style>
 {% endblock %}
