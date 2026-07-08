@@ -3,11 +3,12 @@ from cloudinary.models import CloudinaryField
 
 class Product(models.Model):
     CATEGORY_CHOICES = [
-        ('Skincare', 'Skincare'),
-        ('Makeup', 'Makeup'),
-        ('Haircare', 'Haircare'),
-        ('Fragrance', 'Fragrance'),
-        ('others', 'Others'),
+        ('Skin Care', 'Skin Care'),
+        ('Body Care', 'Body Care'),
+        ('Lip Care', 'Lip Care'),
+        ('General Goods', 'General Goods'),
+        ('Beauty tools and Accessories', 'Beauty tools and Accessories'),
+        ('Oral Care', 'Oral Care'),
     ]
 
     name = models.CharField(max_length=200)
@@ -15,10 +16,17 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_length=10, decimal_places=2, max_digits=10)
     stock = models.IntegerField(default=0)
-    image = CloudinaryField('image')
+    image = CloudinaryField('image', blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, related_name='photos', on_delete=models.CASCADE)
+    image = CloudinaryField('image')
+
+    def __str__(self):
+        return f"{self.product.name} Image"
 
 class Order(models.Model):
     customer_name = models.CharField(max_length=200)

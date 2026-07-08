@@ -225,7 +225,12 @@ def product_create(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            product = form.save()
+            images = request.FILES.getlist('photos')
+            if images:
+                from .models import ProductImage
+                for img in images:
+                    ProductImage.objects.create(product=product, image=img)
             messages.success(request, "Product created successfully!")
             return redirect('dashboard_products')
     else:
@@ -239,7 +244,12 @@ def product_update(request, pk):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
-            form.save()
+            product = form.save()
+            images = request.FILES.getlist('photos')
+            if images:
+                from .models import ProductImage
+                for img in images:
+                    ProductImage.objects.create(product=product, image=img)
             messages.success(request, "Product updated successfully!")
             return redirect('dashboard_products')
     else:

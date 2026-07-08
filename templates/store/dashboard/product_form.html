@@ -15,6 +15,10 @@
                 {% endif %}
             </div>
         {% endfor %}
+        <div class="form-group mb-20">
+            <label>Additional Product Photos (Multiple)</label>
+            <input type="file" name="photos" multiple class="form-input" accept="image/*">
+        </div>
         <button type="submit" class="btn">Save Product</button>
         <a href="{% url 'dashboard_products' %}" class="btn-cancel">Cancel</a>
     </form>

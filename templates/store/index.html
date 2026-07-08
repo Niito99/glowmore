@@ -47,8 +47,16 @@
                 <div class="wishlist-heart">
                     <i class="far fa-heart"></i>
                 </div>
-                <a href="{% url 'product_detail' product.id %}" class="product-image-link">
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                <a href="{% url 'product_detail' product.id %}" class="product-images-slider">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image snap-slide">
+                    {% endif %}
+                    {% for photo in product.photos.all %}
+                        <img src="{{ photo.image.url }}" alt="{{ product.name }}" class="product-image snap-slide">
+                    {% endfor %}
+                    {% if not product.image and not product.photos.all %}
+                        <div class="product-image snap-slide" style="display:flex; align-items:center; justify-content:center; background:#f8f9fa;"><i class="fas fa-image" style="color:#ccc; font-size:3rem;"></i></div>
+                    {% endif %}
                 </a>
                 <div class="product-info">
                     <h3>{{ product.name }}</h3>
@@ -171,6 +179,26 @@
     aspect-ratio: 1 / 1;
     object-fit: cover;
     display: block;
+}
+
+.product-images-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-violet) transparent;
+}
+.product-images-slider::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+.product-images-slider::-webkit-scrollbar-thumb {
+    background: var(--lavender-bg);
+    border-radius: 4px;
+}
+.snap-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
 }
 
 .product-info {
