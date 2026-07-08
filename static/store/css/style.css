@@ -145,7 +145,7 @@
 body {
     font-family: 'Lato', sans-serif;
     color: var(--text-dark);
-    background-color: #e8e2d8;
+    background-color: #ffffff;
     line-height: 1.6;
 }
 
@@ -438,12 +438,12 @@ footer {
 }
 
 .btn-gold {
-    background-color: var(--accent-gold);
+    background-color: #20032e;
     color: var(--white);
 }
 
 .btn-gold:hover {
-    background-color: #B8860B;
+    background-color: #3b1259;
 }
 
 .btn:hover {
@@ -566,7 +566,7 @@ footer {
     position: absolute;
     top: 10px;
     left: 10px;
-    background: #FF0000;
+    background: #20032e;
     color: white;
     padding: 4px 10px;
     font-size: 0.7rem;

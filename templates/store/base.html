@@ -48,9 +48,15 @@
                 <i class="fas fa-shopping-basket"></i>
                 <span class="cart-count">{{ request.session.cart|length|default:"0" }}</span>
             </a>
+            {% if user.is_authenticated %}
             <a href="{% url 'dashboard_home' %}" class="user-icon mobile-hidden">
                 <i class="fas fa-user-circle"></i>
             </a>
+            {% else %}
+            <a href="{% url 'owner_login' %}" class="user-icon mobile-hidden">
+                <i class="fas fa-user-circle"></i>
+            </a>
+            {% endif %}
         </div>
     </div>
 
