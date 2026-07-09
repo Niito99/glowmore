@@ -827,12 +827,13 @@ footer {
         display: flex;
     }
 
-    /* 2-row horizontal scroll grid on mobile */
+    /* 2-row horizontal scroll grid on mobile – 3 cards visible at a time */
     .product-grid {
         display: grid;
+        grid-template-columns: unset;          /* ← nullifies the desktop auto-fill rule */
         grid-template-rows: repeat(2, auto);
         grid-auto-flow: column;
-        grid-auto-columns: calc(32vw - 10px);
+        grid-auto-columns: calc((100vw - 50px) / 3);  /* 3 equal columns, fits any screen */
         overflow-x: auto;
         gap: 12px;
         padding: 10px 5px 30px;
@@ -874,4 +875,5 @@ footer {
         margin-bottom: 5px;
     }
 }
+
 
