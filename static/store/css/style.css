@@ -742,9 +742,106 @@ footer {
     margin-top: 10px;
 }
 
+/* Product Grid & Card Styles (Shared globally for Index and Product Detail Pages) */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid var(--lavender-bg);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(106, 13, 173, 0.1);
+}
+
+.product-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+}
+
+.product-images-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-violet) transparent;
+}
+.product-images-slider::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+.product-images-slider::-webkit-scrollbar-thumb {
+    background: var(--lavender-bg);
+    border-radius: 4px;
+}
+.snap-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+}
+
+.product-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.product-category {
+    font-size: 0.8rem;
+    color: var(--primary-violet);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.product-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    height: 3rem;
+    overflow: hidden;
+}
+
+.product-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.btn-full {
+    width: 100%;
+}
+
 /* Responsive Overrides */
 @media (max-width: 768px) {
     .bottom-nav {
         display: flex;
+    }
+    
+    .product-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 20px;
+        padding: 10px 5px 30px;
+        scrollbar-width: none;
+    }
+    
+    .product-grid::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .product-grid .product-card {
+        flex: 0 0 280px;
+        scroll-snap-align: start;
     }
 }
