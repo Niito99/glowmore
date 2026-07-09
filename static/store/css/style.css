@@ -826,22 +826,52 @@ footer {
     .bottom-nav {
         display: flex;
     }
-    
+
+    /* 2-row horizontal scroll grid on mobile */
     .product-grid {
-        display: flex;
+        display: grid;
+        grid-template-rows: repeat(2, auto);
+        grid-auto-flow: column;
+        grid-auto-columns: calc(32vw - 10px);
         overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        gap: 20px;
+        gap: 12px;
         padding: 10px 5px 30px;
         scrollbar-width: none;
     }
-    
+
     .product-grid::-webkit-scrollbar {
         display: none;
     }
-    
+
+    /* Compact card style on mobile */
     .product-grid .product-card {
-        flex: 0 0 280px;
-        scroll-snap-align: start;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .product-grid .product-info {
+        padding: 10px;
+    }
+
+    .product-grid .product-info h3 {
+        font-size: 0.8rem;
+        height: 2.4rem;
+        margin-bottom: 6px;
+    }
+
+    .product-grid .product-price {
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+    }
+
+    .product-grid .btn {
+        font-size: 0.7rem;
+        padding: 8px 6px;
+    }
+
+    .product-grid .product-category {
+        font-size: 0.65rem;
+        margin-bottom: 5px;
     }
 }
+
