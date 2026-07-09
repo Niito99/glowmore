@@ -54,7 +54,21 @@
         {% for code, name in categories %}
             <a href="?category={{ code }}" class="category-item">
                 <div class="category-circle">
-                    <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=150&auto=format&fit=crop" alt="{{ name }}">
+                    {% if code == 'Skin Care' %}
+                        <img src="{% static 'store/images/skin.jpeg' %}" alt="{{ name }}">
+                    {% elif code == 'Body Care' %}
+                        <img src="{% static 'store/images/body.jpeg' %}" alt="{{ name }}">
+                    {% elif code == 'Lip Care' %}
+                        <img src="{% static 'store/images/lip.jpeg' %}" alt="{{ name }}">
+                    {% elif code == 'General Goods' %}
+                        <img src="{% static 'store/images/general.jpeg' %}" alt="{{ name }}">
+                    {% elif code == 'Beauty tools and Accessories' %}
+                        <img src="{% static 'store/images/beauty.jpeg' %}" alt="{{ name }}">
+                    {% elif code == 'Oral Care' %}
+                        <img src="{% static 'store/images/oral.jpeg' %}" alt="{{ name }}">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=150&auto=format&fit=crop" alt="{{ name }}">
+                    {% endif %}
                 </div>
                 <span class="category-name">{{ name }}</span>
             </a>
@@ -260,7 +274,7 @@
     width: 100%;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .filter-form {
         flex-direction: column;
         align-items: stretch;
@@ -268,6 +282,24 @@
     
     .price-filters input {
         flex: 1;
+    }
+
+    .product-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 20px;
+        padding: 10px 5px 30px;
+        scrollbar-width: none;
+    }
+    
+    .product-grid::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .product-grid .product-card {
+        flex: 0 0 280px;
+        scroll-snap-align: start;
     }
 }
 </style>

@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.db.models import Q
 from .forms import ProductForm
 
 def product_list(request):
@@ -16,11 +17,19 @@ def product_list(request):
     min_price = request.GET.get('min_price')
     max_price = request.GET.get('max_price')
     sort = request.GET.get('sort')
+    search = request.GET.get('search')
 
     products = Product.objects.all()
 
     if category:
         products = products.filter(category=category)
+    
+    if search:
+        products = products.filter(
+            Q(name__icontains=search) | 
+            Q(description__icontains=search) | 
+            Q(category__icontains=search)
+        )
     
     if min_price:
         products = products.filter(price__gte=min_price)
@@ -40,6 +49,7 @@ def product_list(request):
         'categories': categories,
         'current_category': category,
     })
+
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
