@@ -36,10 +36,15 @@ SECRET_KEY = env('SECRET_KEY', default='django-insecure-60k3it%jhx((z@*2wc(gy=n0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG', default=True)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*', 'glowmoregh.com', 'www.glowmoregh.com', 'glowmoregh.onrender.com'])
 
-# CSRF Trusted Origins for Render
-CSRF_TRUSTED_ORIGINS = ['https://glowmore.onrender.com', 'https://*.onrender.com']
+# CSRF Trusted Origins
+CSRF_TRUSTED_ORIGINS = [
+    'https://glowmoregh.com',
+    'https://www.glowmoregh.com',
+    'https://glowmoregh.onrender.com',
+    'https://*.onrender.com',
+]
 
 
 # Application definition
