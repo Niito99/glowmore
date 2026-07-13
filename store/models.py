@@ -9,10 +9,14 @@ class Product(models.Model):
         ('General Goods', 'General Goods'),
         ('Beauty tools and Accessories', 'Beauty tools and Accessories'),
         ('Oral Care', 'Oral Care'),
+        ('Combo', 'Combo'),
+        ('Glow Box', 'Glow Box'),
+        ('Care Box', 'Care Box'),
+        ('Birthday Package', 'Birthday Package'),
     ]
 
     name = models.CharField(max_length=200)
-    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
+    category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
     description = models.TextField()
     price = models.DecimalField(max_length=10, decimal_places=2, max_digits=10)
     stock = models.IntegerField(default=0)

@@ -66,6 +66,14 @@
                         <img src="{% static 'store/images/beauty.jpeg' %}" alt="{{ name }}">
                     {% elif code == 'Oral Care' %}
                         <img src="{% static 'store/images/oral.jpeg' %}" alt="{{ name }}">
+                    {% elif code == 'Combo' %}
+                        <img src="{% static 'store/images/combo.jpeg' %}" alt="{{ name }}">
+                    {% elif code == 'Glow Box' %}
+                        <img src="{% static 'store/images/glow.jpeg' %}" alt="{{ name }}">
+                    {% elif code == 'Care Box' %}
+                        <img src="{% static 'store/images/care.jpeg' %}" alt="{{ name }}">
+                    {% elif code == 'Birthday Package' %}
+                        <img src="{% static 'store/images/birthday.webp' %}" alt="{{ name }}">
                     {% else %}
                         <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=150&auto=format&fit=crop" alt="{{ name }}">
                     {% endif %}
@@ -148,7 +156,7 @@
 
 /* Shop Section */
 .shop-section {
-    padding-bottom: 80px;
+    padding-bottom: 0;
 }
 
 .filter-bar {

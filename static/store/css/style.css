@@ -369,7 +369,7 @@ ul {
 footer {
     background-color: var(--lavender-bg);
     padding: 60px 0 20px;
-    margin-top: 80px;
+    margin-top: 0;
     border-top: none;
 }
 
