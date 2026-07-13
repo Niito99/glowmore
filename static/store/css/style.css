@@ -827,14 +827,18 @@ footer {
         display: flex;
     }
 
-    /* 2-column vertical grid on mobile */
+    /* 12-per-row horizontal scroll grid — wraps to a new row after every 12 */
     .product-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-flow: row;
-        overflow-x: unset;
+        grid-template-columns: repeat(12, calc((100vw - 50px) / 3));
+        overflow-x: auto;
         gap: 12px;
         padding: 10px 5px 30px;
+        scrollbar-width: none;
+    }
+
+    .product-grid::-webkit-scrollbar {
+        display: none;
     }
 
     /* Compact card style on mobile */
