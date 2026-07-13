@@ -827,21 +827,14 @@ footer {
         display: flex;
     }
 
-    /* 2-row horizontal scroll grid on mobile – 3 cards visible at a time */
+    /* 2-column vertical grid on mobile */
     .product-grid {
         display: grid;
-        grid-template-columns: unset;          /* ← nullifies the desktop auto-fill rule */
-        grid-template-rows: repeat(2, auto);
-        grid-auto-flow: column;
-        grid-auto-columns: calc((100vw - 50px) / 3);  /* 3 equal columns, fits any screen */
-        overflow-x: auto;
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-flow: row;
+        overflow-x: unset;
         gap: 12px;
         padding: 10px 5px 30px;
-        scrollbar-width: none;
-    }
-
-    .product-grid::-webkit-scrollbar {
-        display: none;
     }
 
     /* Compact card style on mobile */
