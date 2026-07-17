@@ -305,3 +305,12 @@ def contact_view(request):
 
 def returns_view(request):
     return render(request, 'store/returns.html')
+
+def faq_view(request):
+    return render(request, 'store/faq.html')
+
+def privacy_view(request):
+    return render(request, 'store/privacy.html')
+
+def terms_view(request):
+    return render(request, 'store/terms.html')

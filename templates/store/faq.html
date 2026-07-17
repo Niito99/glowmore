@@ -1,0 +1,25 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}FAQs | GlowMore{% endblock %}
+
+{% block content %}
+<div class="container page-content" style="padding: 80px 20px; max-width: 800px; margin: 0 auto;">
+    <h1 style="text-align: center; color: var(--primary-violet); margin-bottom: 40px; font-family: 'Playfair Display', serif;">Frequently Asked Questions</h1>
+    
+    <div class="faq-item" style="margin-bottom: 30px; padding: 25px; background: rgba(106, 13, 173, 0.03); border-radius: 8px; border: 1px solid rgba(106, 13, 173, 0.05);">
+        <h3 style="color: #333; margin-bottom: 15px; font-weight: 700; font-family: 'Lato', sans-serif; font-size: 1.15rem;">What is your returns policy?</h3>
+        <p style="color: #555; line-height: 1.8; font-size: 1.05rem;">We accept returns for purchased items within the first <strong>7 days after delivery</strong>. To be eligible for a return, the item must be completely unused, in its original unaltered packaging, and in the exact same condition that you received it.</p>
+    </div>
+
+    <div class="faq-item" style="margin-bottom: 30px; padding: 25px; background: rgba(106, 13, 173, 0.03); border-radius: 8px; border: 1px solid rgba(106, 13, 173, 0.05);">
+        <h3 style="color: #333; margin-bottom: 15px; font-weight: 700; font-family: 'Lato', sans-serif; font-size: 1.15rem;">How long does delivery take?</h3>
+        <p style="color: #555; line-height: 1.8; font-size: 1.05rem;">We aim to get your order to you as quickly as possible. Please note that our standard delivery processing time is <strong>within 3 days</strong> after an order is successfully placed.</p>
+    </div>
+
+    <div class="faq-item" style="margin-bottom: 30px; padding: 25px; background: rgba(106, 13, 173, 0.03); border-radius: 8px; border: 1px solid rgba(106, 13, 173, 0.05);">
+        <h3 style="color: #333; margin-bottom: 15px; font-weight: 700; font-family: 'Lato', sans-serif; font-size: 1.15rem;">How are refunds processed?</h3>
+        <p style="color: #555; line-height: 1.8; font-size: 1.05rem;">Once we receive your returned item, our team will inspect it to ensure it perfectly fulfills our return standards (unused and in original packaging). Upon successful verification, we will initiate a refund to your original payment method. Please allow a standard 3-5 business days for the funds to reflect in your account depending on your provider.</p>
+    </div>
+</div>
+{% endblock %}
