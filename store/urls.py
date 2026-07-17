@@ -23,4 +23,5 @@ urlpatterns = [
     path('dashboard/orders/', views.dashboard_orders, name='dashboard_orders'),
     path('about/', views.about_view, name='about'),
     path('contact/', views.contact_view, name='contact'),
+    path('returns/', views.returns_view, name='returns'),
 ]

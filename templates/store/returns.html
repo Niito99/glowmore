@@ -1,0 +1,28 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Returns & Refunds | GlowMore{% endblock %}
+
+{% block content %}
+<div class="container page-content" style="padding: 80px 20px; max-width: 800px; margin: 0 auto;">
+    <h1 style="text-align: center; color: var(--primary-violet); margin-bottom: 40px; font-family: 'Playfair Display', serif;">Returns &amp; Refunds Policy</h1>
+    
+    <div class="policy-section" style="margin-bottom: 30px; line-height: 1.8; font-size: 1.05rem;">
+        <h3 style="color: #333; margin-bottom: 15px; font-weight: 700; font-family: 'Lato', sans-serif; font-size: 1.2rem;">1. Returns Policy</h3>
+        <p>At Glow More Beauty &amp; Cosmetics, your satisfaction is our priority. Please note that <strong>purchased items can be returned within the first 7 days after delivery</strong>. To be eligible for a return, the item must be unused, in its original packaging, and in the same condition that you received it.</p>
+    </div>
+
+    <div class="policy-section" style="margin-bottom: 30px; line-height: 1.8; font-size: 1.05rem;">
+        <h3 style="color: #333; margin-bottom: 15px; font-weight: 700; font-family: 'Lato', sans-serif; font-size: 1.2rem;">2. Delivery Information</h3>
+        <p>We strive to get your products to you as quickly as possible. Please be advised that <strong>delivery is processed within 3 days after an order is placed</strong>.</p>
+    </div>
+
+    <div class="contact-action" style="text-align: center; margin-top: 50px; padding: 40px 20px; background: rgba(106, 13, 173, 0.03); border-radius: 12px; border: 1px solid rgba(106, 13, 173, 0.06);">
+        <h3 style="margin-bottom: 15px; color: #333; font-family: 'Playfair Display', serif;">Need to Process a Return?</h3>
+        <p style="margin-bottom: 25px; color: #666; font-size: 0.95rem;">Contact our support team directly on WhatsApp to initiate your return request.</p>
+        <a href="https://wa.me/233501302852?text=Hello,%20I%20would%20like%20to%20process%20a%20return%20request." target="_blank" class="btn" style="background-color: #25D366; color: white; display: inline-flex; align-items: center; gap: 10px; font-size: 0.9rem;">
+            <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> Process Request on WhatsApp
+        </a>
+    </div>
+</div>
+{% endblock %}

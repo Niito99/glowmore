@@ -302,3 +302,6 @@ def about_view(request):
 
 def contact_view(request):
     return render(request, 'store/contact.html')
+
+def returns_view(request):
+    return render(request, 'store/returns.html')
