@@ -34,8 +34,8 @@
         </div>
         <div class="contact-form-container">
             <h2>Send a Message</h2>
-            <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
-                <input type="hidden" name="access_key" value="{{ web3forms_access_key }}">
+            <form action="{% url 'contact' %}" method="POST" class="contact-form">
+                {% csrf_token %}
                 <div class="form-group">
                     <label>Your Name</label>
                     <input type="text" name="name" required placeholder="Full Name">

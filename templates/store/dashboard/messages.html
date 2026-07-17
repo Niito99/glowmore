@@ -1,0 +1,36 @@
+{% extends 'store/dashboard/base.html' %}
+
+{% block title %}Messages | Admin Dashboard{% endblock %}
+
+{% block dashboard_content %}
+<div class="dashboard-header" style="margin-bottom: 30px;">
+    <h2>Customer Inquiries</h2>
+</div>
+
+<div class="dashboard-table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for msg in inquiries %}
+            <tr>
+                <td>{{ msg.created_at|date:"M d, Y" }}</td>
+                <td><strong>{{ msg.name }}</strong></td>
+                <td><a href="mailto:{{ msg.email }}" style="color: var(--primary-violet);">{{ msg.email }}</a></td>
+                <td style="max-width: 400px; line-height: 1.5;">{{ msg.message }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="text-align: center; padding: 40px; color: #888;">No inquiries received yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

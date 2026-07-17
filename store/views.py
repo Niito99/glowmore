@@ -283,6 +283,13 @@ def dashboard_orders(request):
     orders = Order.objects.all().order_by('-created_at')
     return render(request, 'store/dashboard/orders.html', {'orders': orders})
 
+@login_required
+@user_passes_test(staff_check)
+def dashboard_messages(request):
+    from .models import ContactMessage
+    inquiries = ContactMessage.objects.all().order_by('-created_at')
+    return render(request, 'store/dashboard/messages.html', {'inquiries': inquiries})
+
 def owner_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -302,9 +309,18 @@ def about_view(request):
     return render(request, 'store/about.html')
 
 def contact_view(request):
-    return render(request, 'store/contact.html', {
-        'web3forms_access_key': settings.WEB3FORMS_ACCESS_KEY
-    })
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message_body = request.POST.get('message')
+        
+        from .models import ContactMessage
+        ContactMessage.objects.create(name=name, email=email, message=message_body)
+        
+        messages.success(request, "Your message has been sent successfully! We will get back to you soon.")
+        return redirect('contact')
+        
+    return render(request, 'store/contact.html')
 
 def returns_view(request):
     return render(request, 'store/returns.html')

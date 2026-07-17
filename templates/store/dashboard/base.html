@@ -11,6 +11,7 @@
             <a href="{% url 'dashboard_home' %}" class="{% if request.resolver_match.url_name == 'dashboard_home' %}active{% endif %}">Overview</a>
             <a href="{% url 'dashboard_products' %}" class="{% if 'product' in request.resolver_match.url_name %}active{% endif %}">Inventory</a>
             <a href="{% url 'dashboard_orders' %}" class="{% if request.resolver_match.url_name == 'dashboard_orders' %}active{% endif %}">Orders</a>
+            <a href="{% url 'dashboard_messages' %}" class="{% if request.resolver_match.url_name == 'dashboard_messages' %}active{% endif %}">Messages</a>
             <hr>
             <a href="{% url 'owner_logout' %}">Logout</a>
         </nav>
