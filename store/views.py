@@ -190,7 +190,8 @@ def verify_payment(request, reference):
             "email": email,
             "message": f"Hello {name},\n\nThank you for your order!\n\nOrder Summary:\n{order_items_summary}\nTotal Paid: ₵{total_amount}\nDelivery Address: {address}\n\nWe will contact you shortly for delivery.",
         }
-        requests.post(web3_url, data=web3_data)
+        web3_response = requests.post(web3_url, json=web3_data)
+        print("Web3Forms Response:", web3_response.text)
 
         # Clear cart
         request.session['cart'] = {}
