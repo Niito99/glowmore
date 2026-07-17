@@ -302,7 +302,9 @@ def about_view(request):
     return render(request, 'store/about.html')
 
 def contact_view(request):
-    return render(request, 'store/contact.html')
+    return render(request, 'store/contact.html', {
+        'web3forms_access_key': settings.WEB3FORMS_ACCESS_KEY
+    })
 
 def returns_view(request):
     return render(request, 'store/returns.html')
