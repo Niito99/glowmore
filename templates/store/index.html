@@ -123,6 +123,60 @@
         {% endfor %}
     </div>
 </section>
+
+<!-- NEW ARRIVALS -->
+<section class="container shop-section" style="padding-top: 20px;">
+    <div class="shop-section-header">
+        <h2>NEW ARRIVALS</h2>
+    </div>
+    <div class="product-grid" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 20px; padding-bottom: 20px;">
+        {% for product in new_arrivals %}
+            <div class="product-card hover-lift reveal" style="min-width: 250px; scroll-snap-align: start; flex: 0 0 auto;">
+                <div class="wishlist-heart">
+                    <i class="far fa-heart"></i>
+                </div>
+                <a href="{% url 'product_detail' product.id %}" class="product-images-slider">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image snap-slide">
+                    {% endif %}
+                </a>
+                <div class="product-info">
+                    <h3 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ product.name }}</h3>
+                    <div class="product-price">
+                        <span class="current-price">₵{{ product.price }}</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- BEST SELLERS -->
+<section class="container shop-section" style="padding-top: 20px;">
+    <div class="shop-section-header">
+        <h2>BEST SELLERS</h2>
+    </div>
+    <div class="product-grid" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 20px; padding-bottom: 20px;">
+        {% for product in best_sellers %}
+            <div class="product-card hover-lift reveal" style="min-width: 250px; scroll-snap-align: start; flex: 0 0 auto;">
+                <div class="wishlist-heart">
+                    <i class="far fa-heart"></i>
+                </div>
+                <a href="{% url 'product_detail' product.id %}" class="product-images-slider">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image snap-slide">
+                    {% endif %}
+                </a>
+                <div class="product-info">
+                    <h3 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ product.name }}</h3>
+                    <div class="product-price">
+                        <span class="current-price">₵{{ product.price }}</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}
 
 

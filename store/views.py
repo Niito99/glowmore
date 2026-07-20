@@ -44,10 +44,18 @@ def product_list(request):
 
     categories = Product.CATEGORY_CHOICES
     
+    # We define new arrivals as latest 10 products
+    new_arrivals = Product.objects.all().order_by('-created_at')[:10]
+    
+    # We define best sellers as 10 products based on id sorting for now as a mock metric
+    best_sellers = Product.objects.all()[:10]
+    
     return render(request, 'store/index.html', {
         'products': products,
         'categories': categories,
         'current_category': category,
+        'new_arrivals': new_arrivals,
+        'best_sellers': best_sellers,
     })
 
 
