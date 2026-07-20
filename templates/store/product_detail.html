@@ -25,10 +25,47 @@
 
             <form action="{% url 'add_to_cart' product.id %}" method="POST" class="detail-form">
                 {% csrf_token %}
-                <div class="quantity-selector">
+                <div class="quantity-selector" style="margin-bottom: 20px;">
                     <label for="quantity">Quantity:</label>
                     <input type="number" id="quantity" name="quantity" value="1" min="1" max="{{ product.stock }}">
                 </div>
+
+                {% if product.has_size_options %}
+                <div class="variation-selector">
+                    <label for="size">Size:</label>
+                    <select id="size" name="size" class="form-input" required style="width: 150px;">
+                        <option value="Large">Large</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Small">Small</option>
+                    </select>
+                </div>
+                {% endif %}
+
+                {% if product.color_1 or product.color_2 or product.color_3 %}
+                <div class="variation-selector">
+                    <label>Color:</label>
+                    <div class="color-options">
+                        {% if product.color_1 %}
+                        <label class="color-radio">
+                            <input type="radio" name="color" value="{{ product.color_1 }}" required checked>
+                            <span class="color-badge">{{ product.color_1 }}</span>
+                        </label>
+                        {% endif %}
+                        {% if product.color_2 %}
+                        <label class="color-radio">
+                            <input type="radio" name="color" value="{{ product.color_2 }}" required>
+                            <span class="color-badge">{{ product.color_2 }}</span>
+                        </label>
+                        {% endif %}
+                        {% if product.color_3 %}
+                        <label class="color-radio">
+                            <input type="radio" name="color" value="{{ product.color_3 }}" required>
+                            <span class="color-badge">{{ product.color_3 }}</span>
+                        </label>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
                 
                 <button type="submit" class="btn btn-large">Add to Cart</button>
             </form>
@@ -148,6 +185,43 @@
     border: 1px solid var(--lavender-bg);
     border-radius: 4px;
     text-align: center;
+}
+
+.variation-selector { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+    margin-bottom: 15px; 
+}
+.variation-selector label { 
+    font-weight: 700; 
+    color: var(--text-dark); 
+}
+.color-options { 
+    display: flex; 
+    gap: 10px; 
+    flex-wrap: wrap; 
+}
+.color-radio { 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    gap: 5px; 
+}
+.color-badge { 
+    padding: 6px 18px; 
+    border: 1px solid var(--lavender-bg); 
+    border-radius: 20px; 
+    font-size: 0.95rem; 
+    transition: 0.2s; 
+}
+.color-radio input[type="radio"] { 
+    display: none; 
+}
+.color-radio input[type="radio"]:checked + .color-badge { 
+    background: var(--primary-violet); 
+    color: white; 
+    border-color: var(--primary-violet); 
 }
 
 .btn-large {

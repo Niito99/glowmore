@@ -21,6 +21,13 @@ class Product(models.Model):
     price = models.DecimalField(max_length=10, decimal_places=2, max_digits=10)
     stock = models.IntegerField(default=0)
     image = CloudinaryField('image', blank=True, null=True)
+    
+    has_size_options = models.BooleanField(default=False, help_text="Offer Large, Medium, Small sizes.")
+    color_1 = models.CharField(max_length=50, blank=True, null=True)
+    color_2 = models.CharField(max_length=50, blank=True, null=True)
+    color_3 = models.CharField(max_length=50, blank=True, null=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name

@@ -10,21 +10,28 @@
     {% if cart %}
         <div class="cart-grid">
             <div class="cart-items">
-                {% for product_id, item in cart.items %}
+                {% for cart_key, item in cart.items %}
                     <div class="cart-item">
                         <img src="{{ item.image }}" alt="{{ item.name }}" class="cart-item-image">
                         <div class="cart-item-details">
                             <h3>{{ item.name }}</h3>
+                            {% if item.size or item.color %}
+                                <p class="item-variations" style="font-size: 0.85rem; color: var(--primary-violet); margin-bottom: 5px;">
+                                    {% if item.size %}Size: {{ item.size }}{% endif %}
+                                    {% if item.size and item.color %} | {% endif %}
+                                    {% if item.color %}Color: {{ item.color }}{% endif %}
+                                </p>
+                            {% endif %}
                             <p class="unit-price">₵{{ item.price }}</p>
-                            <form action="{% url 'update_cart' product_id %}" method="POST" class="update-form">
+                            <form action="{% url 'update_cart' cart_key %}" method="POST" class="update-form">
                                 {% csrf_token %}
-                                <label for="quantity-{{ product_id }}">Qty:</label>
-                                <input type="number" name="quantity" id="quantity-{{ product_id }}" value="{{ item.quantity }}" min="1" onchange="this.form.submit()">
+                                <label for="quantity-{{ cart_key }}">Qty:</label>
+                                <input type="number" name="quantity" id="quantity-{{ cart_key }}" value="{{ item.quantity }}" min="1" onchange="this.form.submit()">
                             </form>
                         </div>
                         <div class="cart-item-subtotal">
-                            <p>₵{{ item.price|linebreaksbr }}</p>
-                            <a href="{% url 'remove_from_cart' product_id %}" class="remove-link">Remove</a>
+                            <p>₵{{ item.price }}</p>
+                            <a href="{% url 'remove_from_cart' cart_key %}" class="remove-link">Remove</a>
                         </div>
                     </div>
                 {% endfor %}

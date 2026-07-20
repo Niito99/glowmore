@@ -63,41 +63,53 @@ def product_detail(request, product_id):
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get('quantity', 1))
+    size = request.POST.get('size', '')
+    color = request.POST.get('color', '')
     
     cart = request.session.get('cart', {})
     
-    if str(product_id) in cart:
-        cart[str(product_id)]['quantity'] += quantity
+    # Generate unique key for variations
+    cart_key = str(product_id)
+    if size:
+        cart_key += f"_{size}"
+    if color:
+        cart_key += f"_{color}"
+    
+    if cart_key in cart:
+        cart[cart_key]['quantity'] += quantity
     else:
-        cart[str(product_id)] = {
+        cart[cart_key] = {
+            'product_id': product_id,
             'name': product.name,
             'price': str(product.price),
             'quantity': quantity,
-            'image': product.image.url
+            'image': product.image.url,
+            'size': size,
+            'color': color
         }
     
     request.session['cart'] = cart
     messages.success(request, f"{product.name} added to cart!")
     return redirect('cart_view')
 
-def remove_from_cart(request, product_id):
+def remove_from_cart(request, cart_key):
     cart = request.session.get('cart', {})
-    if str(product_id) in cart:
-        name = cart[str(product_id)]['name']
-        del cart[str(product_id)]
+    if cart_key in cart:
+        name = cart[cart_key]['name']
+        del cart[cart_key]
         request.session['cart'] = cart
         messages.info(request, f"{name} removed from cart.")
     return redirect('cart_view')
 
-def update_cart(request, product_id):
+def update_cart(request, cart_key):
     quantity = int(request.POST.get('quantity', 1))
     cart = request.session.get('cart', {})
     
-    if str(product_id) in cart:
+    if cart_key in cart:
         if quantity > 0:
-            cart[str(product_id)]['quantity'] = quantity
+            cart[cart_key]['quantity'] = quantity
         else:
-            del cart[str(product_id)]
+            del cart[cart_key]
         request.session['cart'] = cart
     
     return redirect('cart_view')
@@ -168,15 +180,25 @@ def verify_payment(request, reference):
         # Create Order Items
         cart = request.session.get('cart', {})
         order_items_summary = ""
-        for p_id, item in cart.items():
-            product = Product.objects.get(id=p_id)
+        for cart_key, item in cart.items():
+            product = Product.objects.get(id=item['product_id'])
             OrderItem.objects.create(
                 order=order,
                 product=product,
                 quantity=item['quantity'],
                 unit_price=item['price']
             )
-            order_items_summary += f"- {product.name} x {item['quantity']} (₵{item['price']})\n"
+            
+            # Format variations for email
+            variation_text = []
+            if item.get('size'):
+                variation_text.append(f"Size: {item['size']}")
+            if item.get('color'):
+                variation_text.append(f"Color: {item['color']}")
+            
+            variation_str = f" ({', '.join(variation_text)})" if variation_text else ""
+            
+            order_items_summary += f"- {product.name}{variation_str} x {item['quantity']} (₵{item['price']})\n"
             # Update stock
             product.stock -= item['quantity']
             product.save()

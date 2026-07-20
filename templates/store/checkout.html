@@ -37,9 +37,17 @@
         <div class="order-summary-sidebar">
             <h2>Order Summary</h2>
             <div class="summary-items">
-                {% for p_id, item in cart.items %}
+                {% for cart_key, item in cart.items %}
                     <div class="summary-item">
-                        <span>{{ item.name }} x {{ item.quantity }}</span>
+                        <span>
+                            {{ item.name }} 
+                            {% if item.size or item.color %}
+                                <br><small style="color: var(--text-muted); font-size: 0.8rem;">
+                                    {% if item.size %}Size: {{ item.size }}{% endif %}{% if item.size and item.color %} | {% endif %}{% if item.color %}Color: {{ item.color }}{% endif %}
+                                </small>
+                            {% endif %}
+                            <br>x {{ item.quantity }}
+                        </span>
                         <span>₵{{ item.price }}</span>
                     </div>
                 {% endfor %}
