@@ -23,6 +23,7 @@
                 <p>{{ product.description }}</p>
             </div>
 
+            {% if product.stock > 0 %}
             <form action="{% url 'add_to_cart' product.id %}" method="POST" class="detail-form">
                 {% csrf_token %}
                 <div class="quantity-selector" style="margin-bottom: 20px;">
@@ -69,6 +70,12 @@
                 
                 <button type="submit" class="btn btn-large">Add to Cart</button>
             </form>
+            {% else %}
+            <div class="out-of-stock-alert" style="margin-bottom: 30px; padding: 20px; background: #fff0f0; color: #e74c3c; border-radius: 8px; border: 1px solid #f5c6c6;">
+                <strong>Currently Unavailable</strong><br>
+                This item is fully out of stock and cannot be added to the cart at this time.
+            </div>
+            {% endif %}
             
             <p class="stock-status">
                 {% if product.stock > 0 %}

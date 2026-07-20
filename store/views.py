@@ -66,6 +66,10 @@ def add_to_cart(request, product_id):
     size = request.POST.get('size', '')
     color = request.POST.get('color', '')
     
+    if product.stock <= 0:
+        messages.error(request, f"Sorry, {product.name} is currently out of stock.")
+        return redirect('product_detail', product_id=product.id)
+    
     cart = request.session.get('cart', {})
     
     # Generate unique key for variations
@@ -76,8 +80,17 @@ def add_to_cart(request, product_id):
         cart_key += f"_{color}"
     
     if cart_key in cart:
-        cart[cart_key]['quantity'] += quantity
+        new_quantity = cart[cart_key]['quantity'] + quantity
+        if new_quantity > product.stock:
+            messages.error(request, f"Sorry, you can't add that many. Only {product.stock} available.")
+            return redirect('product_detail', product_id=product.id)
+            
+        cart[cart_key]['quantity'] = new_quantity
     else:
+        if quantity > product.stock:
+            messages.error(request, f"Sorry, only {product.stock} available.")
+            return redirect('product_detail', product_id=product.id)
+            
         cart[cart_key] = {
             'product_id': product_id,
             'name': product.name,
@@ -106,10 +119,17 @@ def update_cart(request, cart_key):
     cart = request.session.get('cart', {})
     
     if cart_key in cart:
-        if quantity > 0:
+        # Extract product ID to check stock for updates
+        product_id = cart[cart_key]['product_id']
+        product = get_object_or_404(Product, id=product_id)
+        
+        if quantity > product.stock:
+            messages.error(request, f"Cannot update. Only {product.stock} available in stock.")
+        elif quantity > 0:
             cart[cart_key]['quantity'] = quantity
         else:
             del cart[cart_key]
+            
         request.session['cart'] = cart
     
     return redirect('cart_view')
