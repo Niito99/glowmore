@@ -7,11 +7,14 @@
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in form %}
-            <div class="form-group mb-20">
+            <div class="form-group mb-20" id="group_{{ field.name }}">
                 <label>{{ field.label }}</label>
                 {{ field }}
                 {% if field.errors %}
                     <p class="error-msg">{{ field.errors.as_text }}</p>
+                {% endif %}
+                {% if field.help_text %}
+                    <p class="help-text" style="font-size: 0.8rem; color: #888; margin-top: 5px;">{{ field.help_text }}</p>
                 {% endif %}
             </div>
         {% endfor %}
@@ -51,4 +54,45 @@
     color: var(--text-muted);
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sizeCheckbox = document.getElementById('id_has_size_options');
+    const groupStock = document.getElementById('group_stock');
+    const groupStockLarge = document.getElementById('group_stock_large');
+    const groupStockMedium = document.getElementById('group_stock_medium');
+    const groupStockSmall = document.getElementById('group_stock_small');
+
+    function toggleStocks() {
+        if(sizeCheckbox && sizeCheckbox.checked) {
+            if(groupStockLarge) groupStockLarge.style.display = 'block';
+            if(groupStockMedium) groupStockMedium.style.display = 'block';
+            if(groupStockSmall) groupStockSmall.style.display = 'block';
+            if(groupStock) {
+                groupStock.style.display = 'none';
+                document.getElementById('id_stock').value = 0; // zero out standard stock so it doesn't conflict
+            }
+        } else {
+            if(groupStockLarge) {
+                groupStockLarge.style.display = 'none';
+                document.getElementById('id_stock_large').value = 0;
+            }
+            if(groupStockMedium) {
+                groupStockMedium.style.display = 'none';
+                document.getElementById('id_stock_medium').value = 0;
+            }
+            if(groupStockSmall) {
+                groupStockSmall.style.display = 'none';
+                document.getElementById('id_stock_small').value = 0;
+            }
+            if(groupStock) groupStock.style.display = 'block';
+        }
+    }
+    
+    if (sizeCheckbox) {
+        sizeCheckbox.addEventListener('change', toggleStocks);
+        toggleStocks();
+    }
+});
+</script>
 {% endblock %}

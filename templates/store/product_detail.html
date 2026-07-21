@@ -11,7 +11,16 @@
 
     <div class="product-detail-grid">
         <div class="product-image-container">
+            {% if product.photos.exists %}
+            <div class="product-slider" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 0; padding-bottom: 5px;">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-main-image" style="flex: 0 0 100%; scroll-snap-align: start;">
+                {% for photo in product.photos.all %}
+                <img src="{{ photo.image.url }}" alt="{{ product.name }}" class="product-main-image" style="flex: 0 0 100%; scroll-snap-align: start;">
+                {% endfor %}
+            </div>
+            {% else %}
             <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-main-image">
+            {% endif %}
         </div>
         
         <div class="product-actions">

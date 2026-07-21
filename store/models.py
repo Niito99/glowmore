@@ -22,12 +22,21 @@ class Product(models.Model):
     stock = models.IntegerField(default=0)
     image = CloudinaryField('image', blank=True, null=True)
     
-    has_size_options = models.BooleanField(default=False, help_text="Offer Large, Medium, Small sizes.")
+    has_size_options = models.BooleanField(default=False, help_text="Check this to offer Large, Medium, and Small sizes.")
     color_1 = models.CharField(max_length=50, blank=True, null=True)
     color_2 = models.CharField(max_length=50, blank=True, null=True)
     color_3 = models.CharField(max_length=50, blank=True, null=True)
     
+    stock_large = models.IntegerField(default=0)
+    stock_medium = models.IntegerField(default=0)
+    stock_small = models.IntegerField(default=0)
+    
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    def save(self, *args, **kwargs):
+        if self.has_size_options:
+            self.stock = self.stock_large + self.stock_medium + self.stock_small
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name

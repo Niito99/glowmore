@@ -74,8 +74,19 @@ def add_to_cart(request, product_id):
     size = request.POST.get('size', '')
     color = request.POST.get('color', '')
     
-    if product.stock <= 0:
-        messages.error(request, f"Sorry, {product.name} is currently out of stock.")
+    # Determine the available stock for the specific variation
+    available_stock = product.stock
+    if product.has_size_options and size:
+        if size == 'Large':
+            available_stock = product.stock_large
+        elif size == 'Medium':
+            available_stock = product.stock_medium
+        elif size == 'Small':
+            available_stock = product.stock_small
+
+    if available_stock <= 0:
+        size_label = f" ({size})" if size else ""
+        messages.error(request, f"Sorry, {product.name}{size_label} is currently out of stock.")
         return redirect('product_detail', product_id=product.id)
     
     cart = request.session.get('cart', {})
@@ -89,14 +100,14 @@ def add_to_cart(request, product_id):
     
     if cart_key in cart:
         new_quantity = cart[cart_key]['quantity'] + quantity
-        if new_quantity > product.stock:
-            messages.error(request, f"Sorry, you can't add that many. Only {product.stock} available.")
+        if new_quantity > available_stock:
+            messages.error(request, f"Sorry, you can't add that many. Only {available_stock} available.")
             return redirect('product_detail', product_id=product.id)
             
         cart[cart_key]['quantity'] = new_quantity
     else:
-        if quantity > product.stock:
-            messages.error(request, f"Sorry, only {product.stock} available.")
+        if quantity > available_stock:
+            messages.error(request, f"Sorry, only {available_stock} available.")
             return redirect('product_detail', product_id=product.id)
             
         cart[cart_key] = {
@@ -128,11 +139,22 @@ def update_cart(request, cart_key):
     
     if cart_key in cart:
         # Extract product ID to check stock for updates
-        product_id = cart[cart_key]['product_id']
+        item = cart[cart_key]
+        product_id = item['product_id']
+        size = item.get('size', '')
         product = get_object_or_404(Product, id=product_id)
         
-        if quantity > product.stock:
-            messages.error(request, f"Cannot update. Only {product.stock} available in stock.")
+        available_stock = product.stock
+        if product.has_size_options and size:
+            if size == 'Large':
+                available_stock = product.stock_large
+            elif size == 'Medium':
+                available_stock = product.stock_medium
+            elif size == 'Small':
+                available_stock = product.stock_small
+                
+        if quantity > available_stock:
+            messages.error(request, f"Cannot update. Only {available_stock} available in stock.")
         elif quantity > 0:
             cart[cart_key]['quantity'] = quantity
         else:
@@ -228,7 +250,15 @@ def verify_payment(request, reference):
             
             order_items_summary += f"- {product.name}{variation_str} x {item['quantity']} (₵{item['price']})\n"
             # Update stock
-            product.stock -= item['quantity']
+            if product.has_size_options and item.get('size'):
+                if item['size'] == 'Large':
+                    product.stock_large -= item['quantity']
+                elif item['size'] == 'Medium':
+                    product.stock_medium -= item['quantity']
+                elif item['size'] == 'Small':
+                    product.stock_small -= item['quantity']
+            else:
+                product.stock -= item['quantity']
             product.save()
 
         # Trigger Web3Forms Email
