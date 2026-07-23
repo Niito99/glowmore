@@ -13,7 +13,9 @@
                 <th>Phone</th>
                 <th>Amount</th>
                 <th>Date</th>
+                <th>Status</th>
                 <th>Reference</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +27,34 @@
                     <td>{{ order.phone }}</td>
                     <td>₵{{ order.total_amount }}</td>
                     <td>{{ order.created_at|date:"j M, Y H:i" }}</td>
+                    <td>
+                        <span style="padding: 4px 10px; border-radius: 20px; font-size: 0.8em; {% if order.status == 'Processed' %}background:#2ecc71; color:white;{% else %}background:#f1c40f; color:black;{% endif %}">{{ order.status }}</span>
+                    </td>
                     <td><small>{{ order.paystack_reference }}</small></td>
+                    <td>
+                        {% if order.status == 'Pending' %}
+                        <form action="{% url 'dashboard_mark_order' order.id %}" method="POST" style="display:inline-block;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn" style="padding: 5px 12px; font-size: 0.85em;">Process</button>
+                        </form>
+                        {% else %}
+                        <span style="opacity: 0.5;">Done</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="9" style="background-color: #f9f9f9; padding: 10px 20px;">
+                        <strong>Items in Order #{{ order.id }}:</strong>
+                        <ul style="margin-top: 5px; list-style: none; padding-left: 0;">
+                            {% for item in order.items.all %}
+                                <li style="margin-bottom: 3px; font-size: 0.9em;">
+                                    {{ item.quantity }}x {{ item.product.name }}
+                                    {% if item.size %} - Size: <strong>{{ item.size }}</strong>{% endif %}
+                                    {% if item.color %} - Color: <strong>{{ item.color }}</strong>{% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
                 </tr>
             {% empty %}
                 <tr>

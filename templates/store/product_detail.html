@@ -26,10 +26,15 @@
         <div class="product-actions">
             <h1>{{ product.name }}</h1>
             <p class="detail-category">{{ product.category }}</p>
-            <p class="detail-price">₵{{ product.price }}</p>
+            <p class="detail-price">
+                {% if product.original_price and product.original_price > product.price %}
+                <span class="original-price" style="text-decoration: line-through; color: #999; font-size: 0.6em; margin-right: 10px;">₵{{ product.original_price }}</span>
+                {% endif %}
+                ₵{{ product.price }}
+            </p>
             
             <div class="detail-description">
-                <p>{{ product.description }}</p>
+                <p>{{ product.description|linebreaksbr }}</p>
             </div>
 
             {% if product.stock > 0 %}
@@ -44,6 +49,7 @@
                 <div class="variation-selector">
                     <label for="size">Size:</label>
                     <select id="size" name="size" class="form-input" required style="width: 150px;">
+                        <option value="" disabled selected>Select Size</option>
                         <option value="Large">Large</option>
                         <option value="Medium">Medium</option>
                         <option value="Small">Small</option>
@@ -57,7 +63,7 @@
                     <div class="color-options">
                         {% if product.color_1 %}
                         <label class="color-radio">
-                            <input type="radio" name="color" value="{{ product.color_1 }}" required checked>
+                            <input type="radio" name="color" value="{{ product.color_1 }}" required>
                             <span class="color-badge">{{ product.color_1 }}</span>
                         </label>
                         {% endif %}

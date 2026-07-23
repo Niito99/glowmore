@@ -19,6 +19,7 @@ class Product(models.Model):
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
     description = models.TextField()
     price = models.DecimalField(max_length=10, decimal_places=2, max_digits=10)
+    original_price = models.DecimalField(max_length=10, decimal_places=2, max_digits=10, blank=True, null=True, help_text="If set higher than the price, it will show a SALE badge and crossed-out old price")
     stock = models.IntegerField(default=0)
     image = CloudinaryField('image', blank=True, null=True)
     
@@ -55,6 +56,7 @@ class Order(models.Model):
     address = models.TextField()
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
     paystack_reference = models.CharField(max_length=100, blank=True)
+    status = models.CharField(max_length=50, default='Pending')
     created_at = models.DateTimeField(auto_now_add=True)
     is_paid = models.BooleanField(default=False)
 
@@ -76,6 +78,8 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+    size = models.CharField(max_length=50, blank=True, null=True)
+    color = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return f"{self.quantity} x {self.product.name}"

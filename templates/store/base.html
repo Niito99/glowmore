@@ -267,9 +267,11 @@
     }
     .footer-main {
         display: grid;
-        grid-template-columns: 1.8fr 1fr 1.2fr 1.3fr;
-        gap: 40px;
-        padding: 55px 20px 45px;
+        grid-template-columns: 2.2fr 1fr 1.2fr 1.3fr;
+        gap: 30px;
+        padding: 55px 3% 45px;
+        max-width: 1400px;
+        margin: 0 auto;
     }
     /* Brand identity: logo on top, wordmark stacked under it */
     .footer-brand-identity {
@@ -554,7 +556,11 @@
     @media (max-width: 900px) {
         .footer-main {
             grid-template-columns: 1fr 1fr;
+            padding: 50px 20px;
         }
+    }
+    @media (max-width: 768px) {
+        body { padding-bottom: 80px; } /* Ensures the floating nav doesn't cover footer or bottom content */
     }
     @media (max-width: 600px) {
         .footer-main {

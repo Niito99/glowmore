@@ -236,7 +236,9 @@ def verify_payment(request, reference):
                 order=order,
                 product=product,
                 quantity=item['quantity'],
-                unit_price=item['price']
+                unit_price=item['price'],
+                size=item.get('size', ''),
+                color=item.get('color', '')
             )
             
             # Format variations for email
@@ -362,6 +364,16 @@ def product_delete(request, pk):
 def dashboard_orders(request):
     orders = Order.objects.all().order_by('-created_at')
     return render(request, 'store/dashboard/orders.html', {'orders': orders})
+
+@login_required
+@user_passes_test(staff_check)
+def dashboard_mark_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    if request.method == 'POST':
+        order.status = "Processed"
+        order.save()
+        messages.success(request, f"Order #{order.id} marked as Processed.")
+    return redirect('dashboard_orders')
 
 @login_required
 @user_passes_test(staff_check)
