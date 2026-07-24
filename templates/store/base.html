@@ -132,7 +132,7 @@
     <footer class="site-footer">
 
         <!-- Main Footer Grid -->
-        <div class="footer-main">
+        <div class="footer-main container">
 
             <!-- Brand Column -->
             <div class="footer-col footer-brand-col">
@@ -264,12 +264,15 @@
         color: rgba(255,255,255,0.75);
         margin-top: 50px;
         font-size: 0.88rem;
+        padding-top: 0 !important;
     }
     .footer-main {
         display: grid;
         grid-template-columns: 2.2fr 1fr 1.2fr 1.3fr;
         gap: 30px;
-        padding: 10px 0 45px;
+        padding: 0 20px 45px;
+        max-width: 1400px;
+        margin: 0 auto;
         width: 100%;
     }
     /* Brand identity: logo on top, wordmark stacked under it */
@@ -555,7 +558,7 @@
     @media (max-width: 900px) {
         .footer-main {
             grid-template-columns: 1fr 1fr;
-            padding: 50px 0;
+            padding: 0 20px 30px;
         }
     }
     @media (max-width: 768px) {
@@ -564,7 +567,7 @@
     @media (max-width: 600px) {
         .footer-main {
             grid-template-columns: 1fr;
-            padding: 40px 0 30px;
+            padding: 0 20px 30px;
         }
         .footer-newsletter-inner {
             flex-direction: column;
