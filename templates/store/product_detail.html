@@ -57,7 +57,7 @@
                 </div>
                 {% endif %}
 
-                {% if product.color_1 or product.color_2 or product.color_3 %}
+                {% if product.color_1 or product.color_2 or product.color_3 or product.color_4 or product.color_5 %}
                 <div class="variation-selector">
                     <label>Color:</label>
                     <div class="color-options">
@@ -77,6 +77,18 @@
                         <label class="color-radio">
                             <input type="radio" name="color" value="{{ product.color_3 }}" required>
                             <span class="color-badge">{{ product.color_3 }}</span>
+                        </label>
+                        {% endif %}
+                        {% if product.color_4 %}
+                        <label class="color-radio">
+                            <input type="radio" name="color" value="{{ product.color_4 }}" required>
+                            <span class="color-badge">{{ product.color_4 }}</span>
+                        </label>
+                        {% endif %}
+                        {% if product.color_5 %}
+                        <label class="color-radio">
+                            <input type="radio" name="color" value="{{ product.color_5 }}" required>
+                            <span class="color-badge">{{ product.color_5 }}</span>
                         </label>
                         {% endif %}
                     </div>

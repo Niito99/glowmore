@@ -27,6 +27,8 @@ class Product(models.Model):
     color_1 = models.CharField(max_length=50, blank=True, null=True)
     color_2 = models.CharField(max_length=50, blank=True, null=True)
     color_3 = models.CharField(max_length=50, blank=True, null=True)
+    color_4 = models.CharField(max_length=50, blank=True, null=True)
+    color_5 = models.CharField(max_length=50, blank=True, null=True)
     
     stock_large = models.IntegerField(default=0)
     stock_medium = models.IntegerField(default=0)
