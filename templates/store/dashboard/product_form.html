@@ -93,6 +93,19 @@ document.addEventListener('DOMContentLoaded', function() {
         sizeCheckbox.addEventListener('change', toggleStocks);
         toggleStocks();
     }
+
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function() {
+            const btn = form.querySelector('button[type="submit"]');
+            if (btn) {
+                btn.disabled = true;
+                btn.innerText = 'Uploading & Saving... Please wait';
+                btn.style.opacity = '0.7';
+                btn.style.cursor = 'not-allowed';
+            }
+        });
+    }
 });
 </script>
 {% endblock %}
