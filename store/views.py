@@ -263,14 +263,31 @@ def verify_payment(request, reference):
                 product.stock -= item['quantity']
             product.save()
 
-        # Trigger Web3Forms Email
+        # Trigger Web3Forms Email Alert to Store Owner
         web3_url = "https://api.web3forms.com/submit"
         web3_data = {
             "access_key": settings.WEB3FORMS_ACCESS_KEY,
-            "subject": f"New GlowMore Order — {order.id}",
-            "from_name": "GlowMore Store",
-            "email": email,
-            "message": f"Hello {name},\n\nThank you for your order!\n\nOrder Summary:\n{order_items_summary}\nTotal Paid: ₵{total_amount}\nDelivery Address: {address}\n\nWe will contact you shortly for delivery.",
+            "subject": f"🚨 NEW ORDER RECEIVED — Order #{order.id} (₵{total_amount})",
+            "from_name": "GlowMore Store Alert",
+            "Customer_Name": name,
+            "Customer_Email": email,
+            "Customer_Phone": phone,
+            "Delivery_Address": address,
+            "Order_ID": f"#{order.id}",
+            "Total_Paid": f"₵{total_amount}",
+            "Paystack_Reference": reference,
+            "message": (
+                f"NEW ORDER ALERT!\n\n"
+                f"Order ID: #{order.id}\n"
+                f"Customer Name: {name}\n"
+                f"Customer Email: {email}\n"
+                f"Customer Phone: {phone}\n"
+                f"Delivery Address: {address}\n\n"
+                f"ITEMS ORDERED:\n"
+                f"{order_items_summary}\n"
+                f"Total Amount Paid: ₵{total_amount}\n"
+                f"Paystack Ref: {reference}\n"
+            ),
         }
         web3_response = requests.post(web3_url, json=web3_data)
         print("Web3Forms Response:", web3_response.text)
