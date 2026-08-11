@@ -179,8 +179,8 @@ WHITENOISE_USE_FINDERS = True # Force WhiteNoise to find files even in productio
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Paystack Config
+PAYSTACK_PUBLIC_KEY = env('PAYSTACK_PUBLIC_KEY', default='pk_live_YOUR_PAYSTACK_PUBLIC_KEY')
 PAYSTACK_SECRET_KEY = env('PAYSTACK_SECRET_KEY', default='sk_live_YOUR_PAYSTACK_SECRET_KEY')
-PAYSTACK_SECRET_KEY = env('PAYSTACK_SECRET_KEY', default='YOUR_PAYSTACK_SECRET_KEY')
 
 # Web3Forms API Key
 WEB3FORMS_ACCESS_KEY = env('WEB3FORMS_ACCESS_KEY', default=env('access_key', default='410c3d6c-c97b-4823-85c7-034d82a6b005'))
